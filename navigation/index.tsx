@@ -18,8 +18,8 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import Graphs from "../screens/Graphs/Graphs";
-import Ratings from "../screens/Ratings/Ratings";
+import GraphsScreen from "../screens/Graphs/GraphsScreen";
+import RatingsScreen from "../screens/Ratings/RatingsScreen";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -87,9 +87,9 @@ function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="TabOne"
-        component={Ratings}
+        component={RatingsScreen}
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Tab One",
+          title: "Ratings",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Pressable
@@ -110,9 +110,9 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="TabTwo"
-        component={Graphs}
+        component={GraphsScreen}
         options={{
-          title: "Tab Two",
+          title: "Graphs",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

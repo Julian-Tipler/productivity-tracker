@@ -4,11 +4,12 @@ import { Card, Title, Paragraph, Button } from "react-native-paper";
 import { Text, View } from "../../components/Themed";
 import { RootTabScreenProps } from "../../types";
 
-export default function Home({ navigation }: RootTabScreenProps<"TabOne">) {
+export default function GraphsScreen({
+  navigation,
+}: RootTabScreenProps<"TabOne">) {
   return (
     <View style={styles.container}>
-      <Button style={styles.button}>Calendar</Button>
-      <Button style={styles.button}>Fill out today's category</Button>
+      <Text style={styles.title}>Graphs</Text>
     </View>
   );
 }
@@ -16,9 +17,8 @@ export default function Home({ navigation }: RootTabScreenProps<"TabOne">) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "center",
   },
   title: {
     fontSize: 20,
@@ -32,6 +32,6 @@ const styles = StyleSheet.create({
   button: {
     width: 100,
     height: 100,
-    backgroundColor: "blue"
-  }
+    backgroundColor: "blue",
+  },
 });
