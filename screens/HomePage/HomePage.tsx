@@ -1,24 +1,14 @@
 import { StyleSheet } from "react-native";
 import { Card, Title, Paragraph, Button } from "react-native-paper";
 
-import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
 import { RootTabScreenProps } from "../../types";
 
 export default function Home({ navigation }: RootTabScreenProps<"TabOne">) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <Card>
-        <Card.Title title="Card Title" />
-        <Card.Content>
-          <Paragraph>Card content</Paragraph>
-        </Card.Content>
-        <Card.Actions>
-          <Button>Cancel</Button>
-          <Button>Ok</Button>
-        </Card.Actions>
-      </Card>
+      <Button style={styles.button}>Calendar</Button>
+      <Button style={styles.button}>Fill out today's category</Button>
     </View>
   );
 }
@@ -26,8 +16,9 @@ export default function Home({ navigation }: RootTabScreenProps<"TabOne">) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
   },
   title: {
     fontSize: 20,
@@ -38,4 +29,9 @@ const styles = StyleSheet.create({
     height: 1,
     width: "80%",
   },
+  button: {
+    width: 100,
+    height: 100,
+    backgroundColor: "blue"
+  }
 });
