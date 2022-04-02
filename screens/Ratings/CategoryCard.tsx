@@ -4,9 +4,15 @@ import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import RatingsBar from "./RatingsBar";
 import { Category } from "./RatingsScreen";
 
-export const CategoryCard = ({ category }: { category: Category }) => {
-  const [selection, setSelection] = useState(null);
-
+export const CategoryCard = ({
+  category,
+  selection,
+  setSelection,
+}: {
+  category: Category;
+  selection: number | null;
+  setSelection: Function;
+}) => {
   return (
     <View style={styles.categoryCard}>
       <View style={styles.titleContainer}>

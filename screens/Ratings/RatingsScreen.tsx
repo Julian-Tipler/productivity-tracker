@@ -22,11 +22,14 @@ const categories: Category[] = [
 
 export default function RatingsScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selection, setSelection] = useState(null);
+
+  console.log(selection)
 
   return (
     <View style={styles.container}>
       {categories.length > 0 ? (
-        <Categories categories={categories} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
+        <Categories categories={categories} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} selection={selection} setSelection={setSelection}/>
       ) : (
         <View>
           <Text>You filled out all your categories for today!</Text>

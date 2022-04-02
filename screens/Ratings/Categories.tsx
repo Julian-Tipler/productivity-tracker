@@ -12,20 +12,34 @@ export const Categories = ({
   categories,
   currentIndex,
   setCurrentIndex,
+  selection,
+  setSelection,
 }: {
   categories: Category[];
   currentIndex: number;
   setCurrentIndex: Function;
+  selection: number | null;
+  setSelection: Function;
 }) => {
+  const buttonSelected = !!selection;
   return (
     <>
-      <CategoryCard category={categories[currentIndex]} />
-      {currentIndex && <Button onPress={() => onSubmit(currentIndex,setCurrentIndex)} />}
+      <CategoryCard
+        category={categories[currentIndex]}
+        selection={selection}
+        setSelection={setSelection}
+      />
+      {buttonSelected && (
+        <Button onPress={() => onSubmit(currentIndex, setCurrentIndex,setSelection)}>
+          Next Category
+        </Button>
+      )}
     </>
   );
 };
 
-const onSubmit = (currentIndex,setCurrentIndex) => {
-    setCurrentIndex(currentIndex+1)
-    console.log("backend write")
+const onSubmit = (currentIndex:number, setCurrentIndex:Function, setSelection: Function) => {
+  setCurrentIndex(currentIndex + 1);
+  setSelection(null);
+  console.log("backend write");
 };
