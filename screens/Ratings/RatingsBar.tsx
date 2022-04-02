@@ -1,16 +1,29 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { Button } from "react-native-paper";
 
-const RatingsBar = () => {
+type Rating = Number | 0;
 
-    const [selectedButton,setSelectedButton] = useState()
-  return (
-    <View>
-      <Text>RatingsBar</Text>
-    </View>
-  )
-}
+const RatingsBar = ({ quantity }: { quantity: Number }) => {
+  const [selectedButton, setSelectedButton] = useState(0);
+  return <View>{returnButtons(quantity).map(button => button)}</View>;
+};
 
-export default RatingsBar
+const returnButtons = (number: Number) => {
+  const buttons = [];
+  for (let i = 0; i < number; i++)
+    buttons.push(
+      <Button
+        icon="camera"
+        mode="contained"
+        onPress={() => console.log("Pressed")}
+      >
+        Press me
+      </Button>
+    );
+    return buttons
+};
 
-const styles = StyleSheet.create({})
+export default RatingsBar;
+
+const styles = StyleSheet.create({});
