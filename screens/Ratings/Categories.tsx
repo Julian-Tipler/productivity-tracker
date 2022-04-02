@@ -20,11 +20,12 @@ export const Categories = ({
   return (
     <>
       <CategoryCard category={categories[currentIndex]} />
-      {currentIndex && <Button onPress={onSubmit} />}
+      {currentIndex && <Button onPress={() => onSubmit(currentIndex,setCurrentIndex)} />}
     </>
   );
 };
 
-const onSubmit = () => {
-    console.log
+const onSubmit = (currentIndex,setCurrentIndex) => {
+    setCurrentIndex(currentIndex+1)
+    console.log("backend write")
 };
