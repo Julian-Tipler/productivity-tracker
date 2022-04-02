@@ -1,11 +1,22 @@
 import { StyleSheet } from "react-native";
 
 import { Text, View } from "../../components/Themed";
+import SwipeableCard from "./SwipeableCard";
+
+export type Category = {
+    title: String,
+    quantity: Number,
+}
+
+const category:Category = {
+  title: "exercise",
+  quantity: 5
+}
 
 export default function RatingsScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Ratings</Text>
+      <SwipeableCard category={category}/>
     </View>
   );
 }
