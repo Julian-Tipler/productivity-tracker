@@ -1,22 +1,37 @@
+import { useState } from "react";
 import { StyleSheet } from "react-native";
 
 import { Text, View } from "../../components/Themed";
-import SwipeableCard from "./SwipeableCard";
+import { Categories } from "./Categories";
 
 export type Category = {
-    title: String,
-    quantity: Number,
-}
+  title: String;
+  quantity: number;
+};
 
-const category:Category = {
-  title: "exercise",
-  quantity: 5
-}
+const categories: Category[] = [
+  {
+    title: "exercise",
+    quantity: 5,
+  },
+  {
+    title: "nofap",
+    quantity: 4,
+  },
+];
 
 export default function RatingsScreen() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   return (
     <View style={styles.container}>
-      <SwipeableCard category={category}/>
+      {categories.length > 0 ? (
+        <Categories categories={categories} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
+      ) : (
+        <View>
+          <Text>You filled out all your categories for today!</Text>
+        </View>
+      )}
     </View>
   );
 }

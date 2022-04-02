@@ -4,7 +4,7 @@ import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import RatingsBar from "./RatingsBar";
 import { Category } from "./RatingsScreen";
 
-function categoryCard({ category }: { category: Category }) {
+export const CategoryCard = ({ category }: { category: Category }) => {
   const [selection, setSelection] = useState(null);
 
   return (
@@ -25,11 +25,9 @@ function categoryCard({ category }: { category: Category }) {
       />
     </View>
   );
-}
+};
 
 const onSwipe = () => {};
-
-export default categoryCard;
 
 const styles = StyleSheet.create({
   categoryCard: {
