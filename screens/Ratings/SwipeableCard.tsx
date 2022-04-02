@@ -1,32 +1,56 @@
-import React from "react";
-import { StyleSheet, Text } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import RatingsBar from "./RatingsBar";
 import { Category } from "./RatingsScreen";
 
-function SwipeableCard({ category }: { category: Category }) {
+function categoryCard({ category }: { category: Category }) {
+  const [selection, setSelection] = useState(null);
+
   return (
-    <Card style={styles.categoryCard}>
-      <Text style={styles.title}> {category.title}</Text>
-      <RatingsBar quantity={category.quantity} />
-    </Card>
+    <View style={styles.categoryCard}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}> {category.title}</Text>
+      </View>
+      <View style={styles.graphicContainer}>
+        <Text>
+          ........................{category.title}{" "}
+          graphic........................
+        </Text>
+      </View>
+      <RatingsBar
+        quantity={category.quantity}
+        selection={selection}
+        setSelection={setSelection}
+      />
+    </View>
   );
 }
 
-export default SwipeableCard;
+const onSwipe = () => {};
+
+export default categoryCard;
 
 const styles = StyleSheet.create({
+  categoryCard: {
+    height: "70%",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-around",
+    backgroundColor: "white",
+  },
+  titleContainer: {
+    padding: 20,
+  },
   title: {
     alignSelf: "center",
-    padding: 20,
     fontSize: 20,
     fontWeight: "bold",
-    color: "white",
   },
-  categoryCard: {
-    height: 300,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+  graphicContainer: {
+    flex: 3,
+    backgroundColor: "purple",
   },
 });
