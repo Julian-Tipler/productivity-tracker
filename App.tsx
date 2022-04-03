@@ -6,6 +6,10 @@ import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
 import { initializeApp } from "firebase/app";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+
+require("dotenv").config();
+console.log(process.env); 
 
 const firebaseConfig = {
   apiKey: process.env.API_KEY,
@@ -17,11 +21,23 @@ const firebaseConfig = {
   measurementId: process.env.MEASUREMENT_ID,
 };
 
+// console.log(process.env.PROJECT_ID)
+
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function getCategories(db: any) {
+  const categorySnapshot = await getDocs(collection(db, "category"));  
+  categorySnapshot.forEach((doc) =>
+    console.log(console.log(`${doc.id} => ${doc.data()}`))
+  );
+}
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+
+  getCategories(db)
 
   if (!isLoadingComplete) {
     return null;
