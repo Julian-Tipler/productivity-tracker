@@ -23,8 +23,6 @@ const categories: Category[] = [
 export default function RatingsScreen() {
   const [selection, setSelection] = useState(null);
 
-  console.log(selection);
-
   return (
     <View style={styles.container}>
       {categories.length > 0 ? (

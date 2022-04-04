@@ -10,7 +10,7 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDrBQkgBTcm57mUXECgoMtP1DZavaocMtE",
-  authDomain: "productivity-tracker-677a8",
+  authDomain: "productivity-tracker-677a8.firebaseapp.com",
   projectId: "productivity-tracker-677a8",
   storageBucket: "productivity-tracker-677a8.appspot.com",
   messagingSenderId: "812052603151",
@@ -24,7 +24,7 @@ const db = getFirestore(app);
 async function getCategories(db: any) {
   const categorySnapshot = await getDocs(collection(db, "category"));  
   categorySnapshot.forEach((doc) =>
-    console.log(console.log(`${doc.id} => ${doc.data()}`))
+    console.log(`${doc.id} => ${doc.data()}`)
   );
 }
 
