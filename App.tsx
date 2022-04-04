@@ -18,8 +18,6 @@ const firebaseConfig = {
   measurementId: "G-640G6KNS3G",
 };
 
-// console.log(process.env.PROJECT_ID)
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
