@@ -3,13 +3,21 @@ import React, { SetStateAction, useState } from "react";
 import { Button } from "react-native-paper";
 import { blue100 } from "react-native-paper/lib/typescript/styles/colors";
 
-const RatingsBar = ({ quantity, selection, setSelection }: { quantity: Number, selection: Number | null, setSelection: Function }) => {
-
+const RatingsBar = ({
+  quantity,
+  selection,
+  setSelection,
+}: {
+  quantity: Number;
+  selection: Number | null;
+  setSelection: Function;
+}) => {
   const returnButtons = (number: Number) => {
     const buttons = [];
     for (let i = 1; i <= number; i++)
       buttons.push(
         <Button
+          key={`button${i}`}
           style={[styles.button, selection === i && styles.selected]}
           mode="contained"
           onPress={() => setSelection(i)}

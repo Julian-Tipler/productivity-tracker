@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 import { Text, View } from "../../components/Themed";
 import { Categories } from "./Categories";
+import { db } from "../../App"
 
 export type Category = {
   title: String;
@@ -20,10 +22,18 @@ const categories: Category[] = [
   },
 ];
 
+async function getCategories(db: any) {
+  const categorySnapshot = await getDocs(collection(db, "category"));
+  categorySnapshot.forEach((doc) => console.log(`${doc.id} => ${doc.data()}`));
+}
+
 export default function RatingsScreen() {
   const [selection, setSelection] = useState(null);
+  const [categories, setCategories] = useState([])
 
-  console.log(selection);
+  useEffect(() => {
+    getCategories(db);
+  }, []);
 
   return (
     <View style={styles.container}>
