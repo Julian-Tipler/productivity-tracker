@@ -23,17 +23,13 @@ const categories: Category[] = [
 ];
 
 async function getCategories(db: any) {
-  const categorySnapshot = await getDocs(collection(db, "category"));
-  categorySnapshot.forEach((doc) => console.log(`${doc.id} => ${doc.data()}`));
+  return await getDocs(collection(db, "category"));
+  // categorySnapshot.forEach((doc) => console.log(`${doc.id} => ${doc.data()}`));
 }
 
 export default function RatingsScreen() {
   const [selection, setSelection] = useState(null);
   const [categories, setCategories] = useState([])
-
-  useEffect(() => {
-    getCategories(db);
-  }, []);
 
   return (
     <View style={styles.container}>
