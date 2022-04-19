@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { getFirestore, collection, getDocs, query } from "firebase/firestore";
+import { db } from "../../firebase/firebaseConfig";
 
 import { Text, View } from "../../components/Themed";
 import { Categories } from "./Categories";
-import { db } from "../../firebase/firebaseConfig";
 import ZeroState from "./ZeroState";
 
 export type Category = {
