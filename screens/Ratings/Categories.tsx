@@ -19,6 +19,7 @@ export const Categories = ({
   setSelection: Function;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const ratings = db.collection("ratings")
 
   const buttonSelected = !!selection;
   return (
