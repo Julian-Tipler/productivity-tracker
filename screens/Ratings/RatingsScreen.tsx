@@ -5,6 +5,7 @@ import { getFirestore, collection, getDocs, query } from "firebase/firestore";
 import { Text, View } from "../../components/Themed";
 import { Categories } from "./Categories";
 import { db } from "../../firebase/firebaseConfig";
+import ZeroState from "./ZeroState";
 
 export type Category = {
   title: String;
@@ -34,7 +35,7 @@ export default function RatingsScreen() {
 
   useEffect(() => {
     getCategories(db, setCategories);
-  });
+  },[]);
 
   console.log(categories);
 
@@ -47,9 +48,7 @@ export default function RatingsScreen() {
           setSelection={setSelection}
         />
       ) : (
-        <View>
-          <Text>You filled out all your categories for today!</Text>
-        </View>
+        <ZeroState/>
       )}
     </View>
   );

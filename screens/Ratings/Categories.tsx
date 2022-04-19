@@ -6,7 +6,7 @@ import { CategoryCard } from "./CategoryCard";
 import { Category } from "./RatingsScreen";
 import { Button } from "react-native-paper";
 
-//this will eventually (possibly) contain multiple category cards in it
+
 
 export const Categories = ({
   categories,
