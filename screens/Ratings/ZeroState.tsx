@@ -5,7 +5,7 @@ export class ZeroState extends Component {
   render() {
     return (
       <View>
-        <Text>You filled out all your categories for today!</Text>
+        <Text>You don't have any categories. Click the following button to Create your first category:</Text>
       </View>
     );
   }
