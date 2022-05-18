@@ -23,19 +23,19 @@ export type Category = {
 //   },
 // ];
 
-async function getCategories(db: any, setCategories: any) {
-  const q = query(collection(db, "category"));
-  const snapshot = await getDocs(q);
-  setCategories(snapshot.docs.map((doc) => doc.data()));
-}
+// async function getCategories(db: any, setCategories: any) {
+//   const q = query(collection(db, "category"));
+//   const snapshot = await getDocs(q);
+//   setCategories(snapshot.docs.map((doc) => doc.data()));
+// }
 
 export default function RatingsScreen() {
   const [selection, setSelection] = useState(null);
   const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    getCategories(db, setCategories);
-  },[]);
+  // useEffect(() => {
+  //   getCategories(db, setCategories);
+  // },[]);
 
   console.log(categories);
 
