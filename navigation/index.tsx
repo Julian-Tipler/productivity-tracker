@@ -9,6 +9,7 @@ import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
+  useNavigation,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
@@ -16,6 +17,7 @@ import { ColorSchemeName, Pressable } from "react-native";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
+import LoginScreen from "../screens/Auth/LoginScreen";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import GraphsScreen from "../screens/Graphs/GraphsScreen";
@@ -26,6 +28,7 @@ import {
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import { auth } from "../firebase/firebaseConfig";
 
 export default function Navigation({
   colorScheme,
@@ -51,6 +54,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
@@ -75,8 +79,16 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  // const colorScheme = useColorScheme();
-  const colorScheme = "light";
+  const colorScheme = useColorScheme();
+  // const colorScheme = "light";
+
+  const navigation = useNavigation();
+
+  const handleSignOut = () => {
+    auth.signOut().then(() => {
+      navigation.navigate("Login");
+    });
+  };
 
   return (
     <BottomTab.Navigator
@@ -106,6 +118,21 @@ function BottomTabNavigator() {
               />
             </Pressable>
           ),
+          headerLeft: () => (
+            <Pressable
+              onPress={() => handleSignOut()}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <FontAwesome
+                name="anchor"
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginLeft: 15 }}
+              />
+            </Pressable>
+          ),
         })}
       />
       <BottomTab.Screen
@@ -114,6 +141,36 @@ function BottomTabNavigator() {
         options={{
           title: "Graphs",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate("Modal")}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <FontAwesome
+                name="info-circle"
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginRight: 15 }}
+              />
+            </Pressable>
+          ),
+          headerLeft: () => (
+            <Pressable
+              onPress={() => handleSignOut()}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <FontAwesome
+                name="anchor"
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginLeft: 15 }}
+              />
+            </Pressable>
+          ),
         }}
       />
     </BottomTab.Navigator>
