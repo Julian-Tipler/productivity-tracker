@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
+import * as firebase from "firebase";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDrBQkgBTcm57mUXECgoMtP1DZavaocMtE",
   authDomain: "productivity-tracker-677a8.firebaseapp.com",
@@ -11,5 +13,13 @@ const firebaseConfig = {
   measurementId: "G-640G6KNS3G",
 };
 
-export const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app)
+let app;
+if (firebase.apps.length === 0) {
+  app = initializeApp(firebaseConfig);
+} else {
+  app = firebase.app();
+}
+
+export const auth = firebase.auth();
+
+// export const db = getFirestore(app)
