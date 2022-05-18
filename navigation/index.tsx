@@ -108,6 +108,21 @@ function BottomTabNavigator() {
               />
             </Pressable>
           ),
+          headerLeft: () => (
+            <Pressable
+              onPress={() => navigation.navigate("Modal")}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <FontAwesome
+                name="anchor"
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginLeft: 15 }}
+              />
+            </Pressable>
+          ),
         })}
       />
       <BottomTab.Screen

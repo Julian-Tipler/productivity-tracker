@@ -5,7 +5,7 @@ import {
   View,
   TextInput,
 } from "react-native";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
@@ -15,32 +15,33 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
 
   const navigation = useNavigation();
-
-//   useEffect(() => {
-//     const unsubscribe = auth.onAuthStateChanged((user: any) => {
-//       if (user) {
-//         navigation.replace("Root");
-//       }
-//     });
-
-//     return unsubscribe;
-//   }, []);
-
   const auth = getAuth();
 
-  const handleSignUp = createUserWithEmailAndPassword(auth, email, password)
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user: any) => {
+      if (user) {
+        navigation.navigate("Root");
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
+
+  const handleSignUp = () => createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      // ...
+      console.log(user)
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      console.log(error)
       // ..
     });
 
-  const handleLogin = signInWithEmailAndPassword(auth, email, password)
+  const handleLogin = () => signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
