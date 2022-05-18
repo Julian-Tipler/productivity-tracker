@@ -11,7 +11,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const LoginScreen = () => {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <View>
+      <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
           // value={}
@@ -37,7 +37,7 @@ const LoginScreen = () => {
           onPress={() => {}}
           style={[styles.button, styles.buttonOutline]}
         >
-          <Text style={styles.buttonOutlineText}>Login</Text>
+          <Text style={styles.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -52,8 +52,42 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  buttonContainer: {},
-  button: {},
-  buttonOutline: {},
-  buttonOutlineText: {},
+  buttonContainer: {
+    width: "60%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 40,
+  },
+  button: {
+    backgroundColor: "#0782F9",
+    width: "100%",
+    padding: 15,
+    borderRadius: 10,
+  },
+  buttonOutline: {
+    backgroundColor: "white",
+    marginTop: 5,
+    borderColor: "#0782F9",
+    borderWidth: 2,
+  },
+  buttonOutlineText: {
+    color: "#0782F9",
+    fontWeight: "700",
+    fontSize: 16,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "700",
+    fontSize: 16,
+  },
+  inputContainer: {
+    width: "80%",
+  },
+  input: {
+    backgroundColor: "white",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginTop: 5,
+  },
 });
