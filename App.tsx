@@ -5,7 +5,7 @@ import { Provider as PaperProvider } from "react-native-paper";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
-import { AuthContextProvider } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -17,10 +17,10 @@ export default function App() {
     return (
       <PaperProvider>
         <SafeAreaProvider>
-          <AuthContextProvider>
+          <AuthProvider>
             <Navigation colorScheme={colorScheme} />
             <StatusBar />
-          </AuthContextProvider>
+          </AuthProvider>
         </SafeAreaProvider>
       </PaperProvider>
     );
