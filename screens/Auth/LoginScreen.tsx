@@ -9,11 +9,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { AuthContext } from "../../contexts/AuthContext";
+import { auth } from "../../firebase/firebaseConfig";
+
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -24,19 +24,29 @@ const LoginScreen = () => {
 
   const handleLogin = () => {
     login(email, password).then(() => {
-      navigation.navigate("Root");
+      // navigation.navigate("Root");
     });
   };
 
   const handleSignUp = () => {
     if (password.length >= 8) {
       signUp(email, password).then(() => {
-        navigation.navigate("Root");
+        // navigation.navigate("Root");
       });
     } else {
       //toast error!
     }
   };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        navigation.navigate("Root");
+      }
+      // setCurrentUser(currentUser); 
+    });
+    return unsubscribe;
+  }, []);
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
