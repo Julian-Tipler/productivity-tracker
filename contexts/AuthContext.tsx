@@ -13,8 +13,6 @@ export const AuthContext = React.createContext({});
 export function AuthProvider({ children }: { children: any }) {
   const [currentUser, setCurrentUser] = useState("");
 
-  const navigation = useNavigation();
-
   const signUp = (email: string, password: string) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
