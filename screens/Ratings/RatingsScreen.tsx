@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { StyleSheet } from "react-native";
 import { getFirestore, collection, getDocs, query } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
@@ -6,6 +6,7 @@ import { db } from "../../firebase/firebaseConfig";
 import { Text, View } from "../../components/Themed";
 import { Categories } from "./Categories";
 import ZeroState from "./ZeroState";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export type Category = {
   title: String;
@@ -36,8 +37,6 @@ export default function RatingsScreen() {
   // useEffect(() => {
   //   getCategories(db, setCategories);
   // },[]);
-
-  console.log(categories);
 
   return (
     <View style={styles.container}>

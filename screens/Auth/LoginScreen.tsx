@@ -5,18 +5,35 @@ import {
   View,
   TextInput,
 } from "react-native";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { useAuth } from '../../contexts/AuthContext'
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth()
+  const { login, signUp } = useContext(AuthContext) as any;
 
   const navigation = useNavigation();
+
+  const handleLogin = () => {
+    login(email, password);
+  };
+
+  const handleSignUp = () => {
+    if (password.length >= 8) {
+      signUp(email, password);
+    }
+    else {
+      //toast error!
+    }
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -100,31 +117,30 @@ const styles = StyleSheet.create({
   },
 });
 
+// useEffect(() => {
+//   const unsubscribe = auth.onAuthStateChanged((user: any) => {
+//     if (user) {
+//       navigation.navigate("Root");
+//     }
+//   });
 
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user: any) => {
-  //     if (user) {
-  //       navigation.navigate("Root");
-  //     }
-  //   });
+//   return unsubscribe;
+// }, []);
 
-  //   return unsubscribe;
-  // }, []);
+// const handleSignUp = () => createUserWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     const user = userCredential.user;
+//   })
+//   .catch((error) => {
+//     console.log(error.message)
+//   });
 
-  // const handleSignUp = () => createUserWithEmailAndPassword(auth, email, password)
-  //   .then((userCredential) => {
-  //     const user = userCredential.user;
-  //   })
-  //   .catch((error) => {
-  //     console.log(error.message)
-  //   });
-
-  // const handleLogin = () => signInWithEmailAndPassword(auth, email, password)
-  //   .then((userCredential) => {
-  //     const user = userCredential.user;
-  //     console.log(user)
-  //   })
-  //   .catch((error) => {
-  //     const errorCode = error.code;
-  //     const errorMessage = error.message;
-  //   });
+// const handleLogin = () => signInWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     const user = userCredential.user;
+//     console.log(user)
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//   });
