@@ -25,12 +25,18 @@ export function AuthProvider({ children }: { children: any }) {
     return auth.signOut();
   };
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setCurrentUser(currentUser as any);
+    });
+    return unsubscribe;
+  }, []);
+
   const value = {
     currentUser,
     login,
     signUp,
     logout,
   };
-  console.log(currentUser)
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

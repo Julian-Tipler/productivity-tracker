@@ -30,6 +30,7 @@ import {
 import LinkingConfiguration from "./LinkingConfiguration";
 import { auth } from "../firebase/firebaseConfig";
 import { HeaderLeft, HeaderRight } from "./Headers";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function Navigation({
   colorScheme,
@@ -53,22 +54,32 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+  const navigation = useNavigation();
+  const { currentUser } = React.useContext(AuthContext) as any;
+
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen
-        name="Root"
-        component={BottomTabNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="NotFound"
-        component={NotFoundScreen}
-        options={{ title: "Oops!" }}
-      />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
+      {!currentUser ? (
+        <>
+          <Stack.Screen name="Login" component={LoginScreen} />
+        </>
+      ) : (
+        <>
+          <Stack.Screen
+            name="Root"
+            component={BottomTabNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="NotFound"
+            component={NotFoundScreen}
+            options={{ title: "Oops!" }}
+          />
+          <Stack.Group screenOptions={{ presentation: "modal" }}>
+            <Stack.Screen name="Modal" component={ModalScreen} />
+          </Stack.Group>
+        </>
+      )}
     </Stack.Navigator>
   );
 }
@@ -99,8 +110,16 @@ function BottomTabNavigator() {
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
           title: "Ratings",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => <HeaderRight navigation={navigation} colorScheme={colorScheme}/>,
-          headerLeft: () => <HeaderLeft navigation={navigation} colorScheme={colorScheme} action={handleSignOut}/>,
+          headerRight: () => (
+            <HeaderRight navigation={navigation} colorScheme={colorScheme} />
+          ),
+          headerLeft: () => (
+            <HeaderLeft
+              navigation={navigation}
+              colorScheme={colorScheme}
+              action={handleSignOut}
+            />
+          ),
         })}
       />
       <BottomTab.Screen
@@ -109,14 +128,21 @@ function BottomTabNavigator() {
         options={{
           title: "Graphs",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => <HeaderRight navigation={navigation} colorScheme={colorScheme}/>,
-          headerLeft: () => <HeaderLeft navigation={navigation} colorScheme={colorScheme} action={handleSignOut}/>,
+          headerRight: () => (
+            <HeaderRight navigation={navigation} colorScheme={colorScheme} />
+          ),
+          headerLeft: () => (
+            <HeaderLeft
+              navigation={navigation}
+              colorScheme={colorScheme}
+              action={handleSignOut}
+            />
+          ),
         }}
       />
     </BottomTab.Navigator>
   );
 }
-
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
@@ -124,11 +150,6 @@ function TabBarIcon(props: {
 }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }
-
-
-
-
-
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/

@@ -14,39 +14,26 @@ import {
 import { AuthContext } from "../../contexts/AuthContext";
 import { auth } from "../../firebase/firebaseConfig";
 
-
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, signUp } = useContext(AuthContext) as any;
+  const { login, signUp, currentUser } = useContext(AuthContext) as any;
 
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    login(email, password).then(() => {
-      // navigation.navigate("Root");
-    });
+    login(email, password)
   };
 
   const handleSignUp = () => {
     if (password.length >= 8) {
-      signUp(email, password).then(() => {
-        // navigation.navigate("Root");
-      });
+      signUp(email, password)
     } else {
       //toast error!
     }
   };
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        navigation.navigate("Root");
-      }
-      // setCurrentUser(currentUser); 
-    });
-    return unsubscribe;
-  }, []);
+  // if(currentUser) navigation.navigate('Root')
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">

@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { SetStateAction, useState } from "react";
 import { Button } from "react-native-paper";
 import { blue100 } from "react-native-paper/lib/typescript/styles/colors";
+import { auth } from "../../firebase/firebaseConfig";
 
 const RatingsBar = ({
   quantity,
