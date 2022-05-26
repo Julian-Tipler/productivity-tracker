@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
-import RatingsBar from "./RatingsBar";
+import { CategoryCardRatingsBar } from "./CategoryCardRatingsBar";
 import { Category } from "./RatingsScreen";
 
 export const CategoryCard = ({
@@ -20,12 +20,12 @@ export const CategoryCard = ({
       </View>
       <View style={styles.graphicContainer}>
         <Text>
-          ........................{category.title}{" "}
+          ........................{category.title}
           graphic........................
         </Text>
       </View>
-      <RatingsBar
-        quantity={category.quantity}
+      <CategoryCardRatingsBar
+        ratingParameter={category.ratingParameter}
         selection={selection}
         setSelection={setSelection}
       />

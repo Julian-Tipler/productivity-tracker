@@ -4,18 +4,22 @@ import { Button } from "react-native-paper";
 import { blue100 } from "react-native-paper/lib/typescript/styles/colors";
 import { auth } from "../../firebase/firebaseConfig";
 
-const RatingsBar = ({
-  quantity,
+export const CategoryCardRatingsBar = ({
+  ratingParameter,
   selection,
   setSelection,
 }: {
-  quantity: Number;
+  ratingParameter: string;
   selection: Number | null;
   setSelection: Function;
 }) => {
-  const returnButtons = (number: Number) => {
+  const returnButtons = (ratingParameter:string) => {
     const buttons = [];
-    for (let i = 1; i <= number; i++)
+    console.log(ratingParameter)
+    console.log(typeof ratingParameter)
+    console.log(parseInt(ratingParameter))
+    console.log(ratingParameter.length)
+    for (let i = 1; i <= Number(ratingParameter); i++)
       buttons.push(
         <Button
           key={`button${i}`}
@@ -32,13 +36,11 @@ const RatingsBar = ({
   return (
     <>
       <View style={styles.buttonsContainer}>
-        {returnButtons(quantity).map((button) => button)}
+        {returnButtons(ratingParameter).map((button) => button)}
       </View>
     </>
   );
 };
-
-export default RatingsBar;
 
 const styles = StyleSheet.create({
   buttonsContainer: {

@@ -9,20 +9,9 @@ import ZeroState from "./ZeroState";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export type Category = {
-  title: String;
-  quantity: number;
+  title: string;
+  ratingParameter: string;
 };
-
-// const categories: Category[] = [
-//   {
-//     title: "exercise",
-//     quantity: 5,
-//   },
-//   {
-//     title: "nofap",
-//     quantity: 4,
-//   },
-// ];
 
 async function getCategories(db: any, setCategories: any) {
   const q = query(collection(db, "category"));
