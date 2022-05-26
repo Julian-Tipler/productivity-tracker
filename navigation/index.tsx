@@ -29,6 +29,7 @@ import {
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { auth } from "../firebase/firebaseConfig";
+import { HeaderLeft, HeaderRight } from "./Headers";
 
 export default function Navigation({
   colorScheme,
@@ -72,15 +73,10 @@ function RootNavigator() {
   );
 }
 
-/**
- * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
- * https://reactnavigation.org/docs/bottom-tab-navigator
- */
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-  // const colorScheme = "light";
 
   const navigation = useNavigation();
 
@@ -103,36 +99,8 @@ function BottomTabNavigator() {
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
           title: "Ratings",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
-          headerLeft: () => (
-            <Pressable
-              onPress={() => handleSignOut()}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="anchor"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginLeft: 15 }}
-              />
-            </Pressable>
-          ),
+          headerRight: () => <HeaderRight navigation={navigation} colorScheme={colorScheme}/>,
+          headerLeft: () => <HeaderLeft navigation={navigation} colorScheme={colorScheme} action={handleSignOut}/>,
         })}
       />
       <BottomTab.Screen
@@ -141,48 +109,27 @@ function BottomTabNavigator() {
         options={{
           title: "Graphs",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
-          headerLeft: () => (
-            <Pressable
-              onPress={() => handleSignOut()}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="anchor"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginLeft: 15 }}
-              />
-            </Pressable>
-          ),
+          headerRight: () => <HeaderRight navigation={navigation} colorScheme={colorScheme}/>,
+          headerLeft: () => <HeaderLeft navigation={navigation} colorScheme={colorScheme} action={handleSignOut}/>,
         }}
       />
     </BottomTab.Navigator>
   );
 }
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
+
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }
+
+
+
+
+
+
+/**
+ * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
+ */
