@@ -9,7 +9,7 @@ import { auth } from "../firebase/firebaseConfig";
 export const AuthContext = React.createContext({});
 
 export function AuthProvider({ children }: { children: any }) {
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState<any>("");
 
   const signUp = (email: string, password: string) => {
     return createUserWithEmailAndPassword(auth, email, password);
