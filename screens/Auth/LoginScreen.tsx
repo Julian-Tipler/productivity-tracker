@@ -23,14 +23,17 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    login(email, password);
+    login(email, password).then(() => {
+      navigation.navigate("Root");
+    });
   };
 
   const handleSignUp = () => {
     if (password.length >= 8) {
-      signUp(email, password);
-    }
-    else {
+      signUp(email, password).then(() => {
+        navigation.navigate("Root");
+      });
+    } else {
       //toast error!
     }
   };

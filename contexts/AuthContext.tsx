@@ -36,6 +36,6 @@ export function AuthProvider({ children }: { children: any }) {
     signUp,
     logout,
   };
-
+  console.log(currentUser)
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
