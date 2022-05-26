@@ -33,8 +33,6 @@ const LoginScreen = () => {
     }
   };
 
-  // if(currentUser) navigation.navigate('Root')
-
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <View style={styles.inputContainer}>
