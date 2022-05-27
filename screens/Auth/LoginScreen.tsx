@@ -87,15 +87,14 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: "60%",
     justifyContent: "center",
-    alignItems: "center",
     marginTop: 40,
   },
   button: {
     backgroundColor: "#0782F9",
-    width: "100%",
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
+    marginTop:40,
   },
   buttonOutline: {
     backgroundColor: "white",
