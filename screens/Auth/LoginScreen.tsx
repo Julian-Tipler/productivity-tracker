@@ -27,7 +27,6 @@ const LoginScreen = () => {
 
   const handleSignUp = () => {
     if (password.length >= 8) {
-      console.log("HERERER")
       signUp(email, password)
     } else {
       //toast error!

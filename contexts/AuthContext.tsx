@@ -4,7 +4,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { setDoc, collection, doc } from "firebase/firestore";
+import { setDoc, collection, doc, addDoc } from "firebase/firestore";
 import React, { useContext, useState, useEffect } from "react";
 import { auth, db } from "../firebase/firebaseConfig";
 import Navigation from "../navigation";
@@ -17,8 +17,7 @@ export function AuthProvider({ children }: { children: any }) {
   const signUp = (email: string, password: string) => {
     return createUserWithEmailAndPassword(auth, email, password).then(
       (cred) => {
-        // console.log(cred)
-        setDoc(doc(db, "users"), {
+        addDoc(collection(db,'users'), {
           email: cred.user.email,
           authId: cred.user.uid
         });

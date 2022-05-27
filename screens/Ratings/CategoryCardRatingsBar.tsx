@@ -15,10 +15,6 @@ export const CategoryCardRatingsBar = ({
 }) => {
   const returnButtons = (ratingParameter:string) => {
     const buttons = [];
-    console.log(ratingParameter)
-    console.log(typeof ratingParameter)
-    console.log(parseInt(ratingParameter))
-    console.log(ratingParameter.length)
     for (let i = 1; i <= Number(ratingParameter); i++)
       buttons.push(
         <Button
