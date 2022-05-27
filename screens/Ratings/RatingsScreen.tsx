@@ -1,6 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import { StyleSheet } from "react-native";
-import { getFirestore, collection, getDocs, query } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 
 import { Text, View } from "../../components/Themed";
@@ -9,35 +15,35 @@ import ZeroState from "./ZeroState";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export type Category = {
-  title: String;
-  quantity: number;
+  title: string;
+  ratingParameter: string;
 };
 
-// const categories: Category[] = [
-//   {
-//     title: "exercise",
-//     quantity: 5,
-//   },
-//   {
-//     title: "nofap",
-//     quantity: 4,
-//   },
-// ];
+async function getCategories(db: any, setCategories: any, currentUser: any) {
+  //   const queryName = query(
+  // 		collection(firestore,<collection>),
+  // 		where(‘id’=<userId>)
+  // )
 
-// async function getCategories(db: any, setCategories: any) {
-//   const q = query(collection(db, "category"));
-//   const snapshot = await getDocs(q);
-//   setCategories(snapshot.docs.map((doc) => doc.data()));
-// }
+  const q = query(
+    collection(db, "categories"),
+    where("userId", "==", currentUser.uid)
+  );
+  const snapshot = await getDocs(q);
+  setCategories(snapshot.docs.map((doc) => doc.data()));
+}
 
 export default function RatingsScreen() {
   const [selection, setSelection] = useState(null);
   const [categories, setCategories] = useState([]);
 
-  // useEffect(() => {
-  //   getCategories(db, setCategories);
-  // },[]);
+  const { currentUser } = useContext(AuthContext) as any;
 
+  useEffect(() => {
+    getCategories(db, setCategories, currentUser);
+  }, []);
+  console.log(categories);
+  console.log(currentUser)
   return (
     <View style={styles.container}>
       {categories.length ? (
@@ -47,7 +53,7 @@ export default function RatingsScreen() {
           setSelection={setSelection}
         />
       ) : (
-        <ZeroState/>
+        <ZeroState />
       )}
     </View>
   );

@@ -19,7 +19,6 @@ export const Categories = ({
   setSelection: Function;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const ratings = db.collection("ratings")
 
   const buttonSelected = !!selection;
   return (
@@ -37,7 +36,7 @@ export const Categories = ({
       )}
       {buttonSelected && (
         <Button
-          onPress={() => onSubmit(currentIndex, setCurrentIndex, setSelection)}
+          onPress={() => onSubmitRating(currentIndex, setCurrentIndex, setSelection)}
         >
           Next Category
         </Button>
@@ -46,20 +45,20 @@ export const Categories = ({
   );
 };
 
-const onSubmit = (
+const onSubmitRating = (
   currentIndex: number,
   setCurrentIndex: Function,
   setSelection: Function
 ) => {
-  firestore
-    .collection("books")
-    .add(data)
-    .then(() => {
-      console.log("successful");
-      setCurrentIndex(currentIndex + 1);
-      setSelection(null);
-    })
-    .catch(() => {
-      console.log("whoops, an error");
-    });
+//   firestore
+//     .collection("books")
+//     .add(data)
+//     .then(() => {
+//       console.log("successful");
+//       setCurrentIndex(currentIndex + 1);
+//       setSelection(null);
+//     })
+//     .catch(() => {
+//       console.log("whoops, an error");
+//     });
 };

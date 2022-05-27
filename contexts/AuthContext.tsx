@@ -4,8 +4,9 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { setDoc, collection, doc, addDoc } from "firebase/firestore";
 import React, { useContext, useState, useEffect } from "react";
-import { auth } from "../firebase/firebaseConfig";
+import { auth, db } from "../firebase/firebaseConfig";
 import Navigation from "../navigation";
 
 export const AuthContext = React.createContext({});
@@ -14,7 +15,13 @@ export function AuthProvider({ children }: { children: any }) {
   const [currentUser, setCurrentUser] = useState("");
 
   const signUp = (email: string, password: string) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+    return createUserWithEmailAndPassword(auth, email, password).then(
+      (cred) => {
+        setDoc(doc(db,'users',cred.user.uid), {
+          email: cred.user.email,
+        });
+      }
+    );
   };
 
   const login = (email: string, password: string) => {
@@ -25,12 +32,18 @@ export function AuthProvider({ children }: { children: any }) {
     return auth.signOut();
   };
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setCurrentUser(currentUser as any);
+    });
+    return unsubscribe;
+  }, []);
+
   const value = {
     currentUser,
     login,
     signUp,
     logout,
   };
-  console.log(currentUser)
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
