@@ -31,6 +31,7 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import { auth } from "../firebase/firebaseConfig";
 import { HeaderLeft, HeaderRight } from "./Headers";
 import { AuthContext } from "../contexts/AuthContext";
+import CategoriesScreen from "../screens/Categories/CategoriesScreen";
 
 export default function Navigation({
   colorScheme,
@@ -124,9 +125,9 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="TabTwo"
-        component={GraphsScreen}
+        component={CategoriesScreen}
         options={{
-          title: "Graphs",
+          title: "Categories",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <HeaderRight navigation={navigation} colorScheme={colorScheme} />
