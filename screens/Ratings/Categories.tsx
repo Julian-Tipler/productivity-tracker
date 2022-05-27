@@ -36,7 +36,7 @@ export const Categories = ({
       )}
       {buttonSelected && (
         <Button
-          onPress={() => onSubmit(currentIndex, setCurrentIndex, setSelection)}
+          onPress={() => onSubmitRating(currentIndex, setCurrentIndex, setSelection)}
         >
           Next Category
         </Button>
@@ -45,7 +45,7 @@ export const Categories = ({
   );
 };
 
-const onSubmit = (
+const onSubmitRating = (
   currentIndex: number,
   setCurrentIndex: Function,
   setSelection: Function
