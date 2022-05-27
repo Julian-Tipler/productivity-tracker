@@ -17,9 +17,8 @@ export function AuthProvider({ children }: { children: any }) {
   const signUp = (email: string, password: string) => {
     return createUserWithEmailAndPassword(auth, email, password).then(
       (cred) => {
-        addDoc(collection(db,'users'), {
+        setDoc(doc(db,'users',cred.user.uid), {
           email: cred.user.email,
-          authId: cred.user.uid
         });
       }
     );
