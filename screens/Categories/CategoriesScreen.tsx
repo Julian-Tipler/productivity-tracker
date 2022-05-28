@@ -1,15 +1,22 @@
+import { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Card, Title, Paragraph, Button } from "react-native-paper";
 
 import { Text, View } from "../../components/Themed";
+import { AuthContext } from "../../contexts/AuthContext";
 import { RootTabScreenProps } from "../../types";
 
 export default function CategoriesScreen({
   navigation,
 }: RootTabScreenProps<"TabOne">) {
+
+  const { currentUser } = useContext(AuthContext) as any;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Categories</Text>
+      <Text style={styles.title}>Category (edit, delete)</Text>
+      <Text style={styles.title}>Category (edit, delete)</Text>
+      <Text style={styles.title}>Plus Button (create)</Text>
     </View>
   );
 }
