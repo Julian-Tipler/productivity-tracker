@@ -110,7 +110,7 @@ function BottomTabNavigator() {
         component={RatingsScreen}
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
           title: "Ratings",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="check" color={color} />,
           headerRight: () => (
             <HeaderRight navigation={navigation} colorScheme={colorScheme} />
           ),
@@ -128,7 +128,7 @@ function BottomTabNavigator() {
         component={CategoriesScreen}
         options={{
           title: "Categories",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="bookmark" color={color} />,
           headerRight: () => (
             <HeaderRight navigation={navigation} colorScheme={colorScheme} />
           ),
