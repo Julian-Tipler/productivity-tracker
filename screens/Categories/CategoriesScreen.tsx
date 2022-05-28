@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { StyleSheet } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { Card, Title, Paragraph, Button } from "react-native-paper";
 
 import { Text, View } from "../../components/Themed";
@@ -8,11 +9,14 @@ import { RootTabScreenProps } from "../../types";
 
 export default function CategoriesScreen({
   navigation,
-}: RootTabScreenProps<"TabOne">) {
+}: RootTabScreenProps<"TabTwo">) {
   const { currentUser } = useContext(AuthContext) as any;
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={() => navigation.navigate("Modal")}>
+        <Text>Open Modal</Text>
+      </TouchableOpacity>
       <Text style={styles.title}>Category (edit, delete)</Text>
       <Text style={styles.title}>Category (edit, delete)</Text>
       <Text style={styles.title}>Plus Button (create)</Text>

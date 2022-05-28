@@ -14,13 +14,14 @@ import { Categories } from "./Categories";
 import ZeroState from "./ZeroState";
 import { AuthContext } from "../../contexts/AuthContext";
 import { getCategories } from "../../api/Categories/getCategories"
+import { RootTabScreenProps } from "../../types";
 
 export type Category = {
   title: string;
   ratingParameter: string;
 };
 
-export default function RatingsScreen() {
+export default function RatingsScreen({ navigation }: RootTabScreenProps<"TabOne">) {
   const [selection, setSelection] = useState(null);
   const [categories, setCategories] = useState([]);
 
