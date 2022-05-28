@@ -10,9 +10,10 @@ import {
 
 import { db } from "../../firebase/firebaseConfig";
 
-export const createCategory = async (name: string, currentUser: any) => {
+export const createCategory = async (name: string, ratingParameter: string, currentUser: any) => {
   addDoc(collection(db, "collections"), {
     name: name,
+    ratingParameter: ratingParameter,
     userId: currentUser.uid,
   });
 };

@@ -1,3 +1,4 @@
+import { FontAwesome } from "@expo/vector-icons";
 import { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -15,7 +16,7 @@ export default function CategoriesScreen({
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.navigate("Modal")}>
-        <Text>Open Modal</Text>
+        <FontAwesome name="plus" color="white" size={50}/>
       </TouchableOpacity>
       <Text style={styles.title}>Category (edit, delete)</Text>
       <Text style={styles.title}>Category (edit, delete)</Text>
