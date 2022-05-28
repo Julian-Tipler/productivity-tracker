@@ -9,7 +9,6 @@ import { RootTabScreenProps } from "../../types";
 export default function CategoriesScreen({
   navigation,
 }: RootTabScreenProps<"TabOne">) {
-
   const { currentUser } = useContext(AuthContext) as any;
 
   return (

@@ -1,12 +1,11 @@
 import {
-  getFirestore,
   collection,
   getDocs,
   query,
   where,
 } from "firebase/firestore";
 
-import { db } from "../firebase/firebaseConfig";
+import { db } from "../../firebase/firebaseConfig";
 
 export const getCategories = async (setCategories: any, currentUser: any) => {
   const q = query(

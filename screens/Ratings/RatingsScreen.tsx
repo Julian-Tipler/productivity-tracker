@@ -13,7 +13,7 @@ import { Text, View } from "../../components/Themed";
 import { Categories } from "./Categories";
 import ZeroState from "./ZeroState";
 import { AuthContext } from "../../contexts/AuthContext";
-import { getCategories } from "../../api/getCategories"
+import { getCategories } from "../../api/Categories/getCategories"
 
 export type Category = {
   title: string;
