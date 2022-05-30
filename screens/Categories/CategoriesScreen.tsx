@@ -1,4 +1,5 @@
 import { FontAwesome } from "@expo/vector-icons";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -10,7 +11,9 @@ import {
   CategoryFormContext,
   CategoryFormProvider,
 } from "../../contexts/CategoryFormContext";
-import { RootTabScreenProps } from "../../types";
+import { RootStackParamList, RootTabScreenProps } from "../../types";
+
+
 
 export default function CategoriesScreen({
   navigation,
@@ -21,7 +24,7 @@ export default function CategoriesScreen({
     <CategoryFormProvider>
       <View style={styles.container}>
         <TouchableOpacity onPress={() => navigation.navigate("Modal")}>
-          <FontAwesome name="plus" color="white" size={50} />
+          <FontAwesome name="plus" color="red" size={50} />
         </TouchableOpacity>
         <Text style={styles.title}>Category (edit, delete)</Text>
         <Text style={styles.title}>Category (edit, delete)</Text>
