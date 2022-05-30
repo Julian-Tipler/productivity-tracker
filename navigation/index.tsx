@@ -31,8 +31,8 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import { auth } from "../firebase/firebaseConfig";
 import { HeaderLeft, HeaderRight } from "./Headers";
 import { AuthContext } from "../contexts/AuthContext";
-import CategoriesScreen from "../screens/Categories/CategoriesScreen";
-import { CategoryCreationModal } from "../screens/Categories/CategoryCreationModal"
+import { CategoriesStack } from "../screens/Categories/CategoriesStack";
+import { CategoryCreationModal } from "../screens/Categories/CategoryCreationModal";
 
 export default function Navigation({
   colorScheme,
@@ -127,10 +127,12 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="TabTwo"
-        component={CategoriesScreen}
+        component={CategoriesStack}
         options={{
           title: "Categories",
-          tabBarIcon: ({ color }) => <TabBarIcon name="bookmark" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="bookmark" color={color} />
+          ),
           headerRight: () => (
             <HeaderRight navigation={navigation} colorScheme={colorScheme} />
           ),

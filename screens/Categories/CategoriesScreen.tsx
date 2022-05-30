@@ -15,22 +15,20 @@ import { RootStackParamList, RootTabScreenProps } from "../../types";
 
 
 
-export default function CategoriesScreen({
+export function CategoriesScreen({
   navigation,
 }: RootTabScreenProps<"TabTwo">) {
   const { currentUser } = useContext(AuthContext) as any;
 
   return (
-    <CategoryFormProvider>
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigation.navigate("Modal")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Root", {screen: "TabTwo", params: {screen:"CategoryForm"}})}>
           <FontAwesome name="plus" color="red" size={50} />
         </TouchableOpacity>
         <Text style={styles.title}>Category (edit, delete)</Text>
         <Text style={styles.title}>Category (edit, delete)</Text>
         <Text style={styles.title}>Plus Button (create)</Text>
       </View>
-    </CategoryFormProvider>
   );
 }
 
