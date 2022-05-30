@@ -32,7 +32,6 @@ import { auth } from "../firebase/firebaseConfig";
 import { HeaderLeft, HeaderRight } from "./Headers";
 import { AuthContext } from "../contexts/AuthContext";
 import { CategoriesStack } from "../screens/Categories/CategoriesStack";
-import { CategoryCreationModal } from "../screens/Categories/CategoryCreationModal";
 
 export default function Navigation({
   colorScheme,
@@ -79,7 +78,7 @@ function RootNavigator() {
           />
           <Stack.Group screenOptions={{ presentation: "modal" }}>
             {/* <Stack.Screen name="Modal" component={ModalScreen} /> */}
-            <Stack.Screen name="Modal" component={CategoryCreationModal} />
+            {/* <Stack.Screen name="Modal" component={CategoryCreationModal} /> */}
           </Stack.Group>
         </>
       )}

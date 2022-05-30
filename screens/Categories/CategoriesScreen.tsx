@@ -21,12 +21,12 @@ export function CategoriesScreen({
 
   return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigation.navigate("Root", {screen: "TabTwo", params: {screen:"CategoryForm"}})}>
-          <FontAwesome name="plus" color="red" size={50} />
-        </TouchableOpacity>
         <Text style={styles.title}>Category (edit, delete)</Text>
         <Text style={styles.title}>Category (edit, delete)</Text>
         <Text style={styles.title}>Plus Button (create)</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Root", {screen: "TabTwo", params: {screen:"CategoryForm"}})}>
+          <FontAwesome name="plus" color="red" size={50} />
+        </TouchableOpacity>
       </View>
   );
 }
