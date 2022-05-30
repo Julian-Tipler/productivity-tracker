@@ -18,7 +18,6 @@ import { RootStackParamList, RootTabScreenProps } from "../../types";
 export function CategoriesScreen({
   navigation,
 }: RootTabScreenProps<"TabTwo">) {
-  const { currentUser } = useContext(AuthContext) as any;
 
   return (
       <View style={styles.container}>
