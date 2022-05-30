@@ -1,12 +1,23 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { Category } from "./CategoriesScreen";
+import { Card } from "@rneui/themed";
 
-const CategoryCard = () => {
+export const CategoryCard = ({ category }: { category: Category }) => {
+  console.log(category);
+  const { name, ratingParameter } = category;
+  console.log(ratingParameter)
   return (
     <View>
-      <Text>CategoryCard</Text>
+      <Card>
+        <Card.Title>{name}</Card.Title>
+        <Card.Divider />
+        <Text>{ratingParameter}</Text>
+      </Card>
     </View>
-  )
-}
+  );
+};
 
-export default CategoryCard
+const styles = StyleSheet.create({
+
+})

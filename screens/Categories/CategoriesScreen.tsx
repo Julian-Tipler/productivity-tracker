@@ -9,13 +9,18 @@ import { Text, View } from "../../components/Themed";
 import { AuthContext } from "../../contexts/AuthContext";
 import { CategoriesContext } from "../../contexts/CategoriesContext";
 import { RootStackParamList, RootTabScreenProps } from "../../types";
+import { CategoryCard } from "./CategoryCard";
+
+export type Category = {
+  name: string;
+  ratingParameter: string;
+};
 
 export function CategoriesScreen({ navigation }: RootTabScreenProps<"TabTwo">) {
   const { getCategories, categories, setCategories } = useContext(
     CategoriesContext
   ) as any;
   const { currentUser } = useContext(AuthContext) as any;
-  console.log(getCategories);
 
   useEffect(() => {
     getCategories(setCategories, currentUser);
@@ -23,8 +28,13 @@ export function CategoriesScreen({ navigation }: RootTabScreenProps<"TabTwo">) {
 
   return (
     <View style={styles.container}>
-      {categories.map((category) => {
-      
+      {categories.map((category: Category) => {
+        return (
+          <CategoryCard
+            category={category}
+            key={`$category-${category.name}`}
+          />
+        );
       })}
       <Text style={styles.title}>Plus Button (create)</Text>
       <TouchableOpacity
