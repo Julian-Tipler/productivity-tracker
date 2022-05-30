@@ -31,8 +31,7 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import { auth } from "../firebase/firebaseConfig";
 import { HeaderLeft, HeaderRight } from "./Headers";
 import { AuthContext } from "../contexts/AuthContext";
-import CategoriesScreen from "../screens/Categories/CategoriesScreen";
-import { CategoryCreationModal } from "../screens/Categories/CategoryCreationModal"
+import { CategoriesStack } from "../screens/Categories/CategoriesStack";
 
 export default function Navigation({
   colorScheme,
@@ -79,7 +78,7 @@ function RootNavigator() {
           />
           <Stack.Group screenOptions={{ presentation: "modal" }}>
             {/* <Stack.Screen name="Modal" component={ModalScreen} /> */}
-            <Stack.Screen name="Modal" component={CategoryCreationModal} />
+            {/* <Stack.Screen name="Modal" component={CategoryCreationModal} /> */}
           </Stack.Group>
         </>
       )}
@@ -102,7 +101,7 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="TabTwo"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
@@ -127,10 +126,12 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="TabTwo"
-        component={CategoriesScreen}
+        component={CategoriesStack}
         options={{
           title: "Categories",
-          tabBarIcon: ({ color }) => <TabBarIcon name="bookmark" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="bookmark" color={color} />
+          ),
           headerRight: () => (
             <HeaderRight navigation={navigation} colorScheme={colorScheme} />
           ),

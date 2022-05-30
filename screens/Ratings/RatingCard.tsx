@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
-import { CategoryCardRatingsBar } from "./CategoryCardRatingsBar";
+import { RatingCardRatingsBar } from "./RatingCardRatingsBar";
 import { Category } from "./RatingsScreen";
 
-export const CategoryCard = ({
+export const RatingCard = ({
   category,
   selection,
   setSelection,
@@ -24,7 +24,7 @@ export const CategoryCard = ({
           graphic........................
         </Text>
       </View>
-      <CategoryCardRatingsBar
+      <RatingCardRatingsBar
         ratingParameter={category.ratingParameter}
         selection={selection}
         setSelection={setSelection}

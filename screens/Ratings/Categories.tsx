@@ -5,7 +5,7 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import { RectButton } from "react-native-gesture-handler";
 import { db } from "../../firebase/firebaseConfig";
 
-import { CategoryCard } from "./CategoryCard";
+import { RatingCard } from "./RatingCard";
 import { Category } from "./RatingsScreen";
 
 
@@ -24,7 +24,7 @@ export const Categories = ({
   return (
     <>
       {currentIndex < categories.length ? (
-        <CategoryCard
+        <RatingCard
           category={categories[currentIndex]}
           selection={selection}
           setSelection={setSelection}

@@ -1,33 +1,43 @@
 import { FontAwesome } from "@expo/vector-icons";
-import { useContext } from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useContext, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Card, Title, Paragraph, Button } from "react-native-paper";
 
 import { Text, View } from "../../components/Themed";
 import { AuthContext } from "../../contexts/AuthContext";
-import {
-  CategoryFormContext,
-  CategoryFormProvider,
-} from "../../contexts/CategoryFormContext";
-import { RootTabScreenProps } from "../../types";
+import { CategoriesContext } from "../../contexts/CategoriesContext";
+import { RootStackParamList, RootTabScreenProps } from "../../types";
 
-export default function CategoriesScreen({
-  navigation,
-}: RootTabScreenProps<"TabTwo">) {
+export function CategoriesScreen({ navigation }: RootTabScreenProps<"TabTwo">) {
+  const { getCategories, categories, setCategories } = useContext(
+    CategoriesContext
+  ) as any;
   const { currentUser } = useContext(AuthContext) as any;
+  console.log(getCategories);
+
+  useEffect(() => {
+    getCategories(setCategories, currentUser);
+  }, []);
 
   return (
-    <CategoryFormProvider>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigation.navigate("Modal")}>
-          <FontAwesome name="plus" color="white" size={50} />
-        </TouchableOpacity>
-        <Text style={styles.title}>Category (edit, delete)</Text>
-        <Text style={styles.title}>Category (edit, delete)</Text>
-        <Text style={styles.title}>Plus Button (create)</Text>
-      </View>
-    </CategoryFormProvider>
+    <View style={styles.container}>
+      {categories.map((category) => {
+      
+      })}
+      <Text style={styles.title}>Plus Button (create)</Text>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("Root", {
+            screen: "TabTwo",
+            params: { screen: "CategoryForm" },
+          } as any)
+        }
+      >
+        <FontAwesome name="plus" color="red" size={50} />
+      </TouchableOpacity>
+    </View>
   );
 }
 

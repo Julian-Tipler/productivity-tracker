@@ -4,7 +4,7 @@ import { Button } from "react-native-paper";
 import { blue100 } from "react-native-paper/lib/typescript/styles/colors";
 import { auth } from "../../firebase/firebaseConfig";
 
-export const CategoryCardRatingsBar = ({
+export const RatingCardRatingsBar = ({
   ratingParameter,
   selection,
   setSelection,
