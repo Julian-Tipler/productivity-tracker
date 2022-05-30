@@ -1,19 +1,9 @@
-import { useNavigation } from "@react-navigation/native";
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { setDoc, collection, doc, addDoc } from "firebase/firestore";
 import React, { useContext, useState, useEffect } from "react";
-import { auth, db } from "../firebase/firebaseConfig";
-import Navigation from "../navigation";
+import { createCategory } from "../api/Categories/createCategory";
 
 export const CategoryFormContext = React.createContext({});
 
 export function CategoryFormProvider({ children }: { children: any }) {
-  const createCategory = () => {};
-
   useEffect(() => {}, []);
 
   const value = {
