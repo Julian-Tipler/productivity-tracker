@@ -6,6 +6,10 @@ import { Card, Title, Paragraph, Button } from "react-native-paper";
 
 import { Text, View } from "../../components/Themed";
 import { AuthContext } from "../../contexts/AuthContext";
+import {
+  CategoryFormContext,
+  CategoryFormProvider,
+} from "../../contexts/CategoryFormContext";
 import { RootTabScreenProps } from "../../types";
 
 export default function CategoriesScreen({
@@ -14,14 +18,16 @@ export default function CategoriesScreen({
   const { currentUser } = useContext(AuthContext) as any;
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate("Modal")}>
-        <FontAwesome name="plus" color="white" size={50}/>
-      </TouchableOpacity>
-      <Text style={styles.title}>Category (edit, delete)</Text>
-      <Text style={styles.title}>Category (edit, delete)</Text>
-      <Text style={styles.title}>Plus Button (create)</Text>
-    </View>
+    <CategoryFormProvider>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={() => navigation.navigate("Modal")}>
+          <FontAwesome name="plus" color="white" size={50} />
+        </TouchableOpacity>
+        <Text style={styles.title}>Category (edit, delete)</Text>
+        <Text style={styles.title}>Category (edit, delete)</Text>
+        <Text style={styles.title}>Plus Button (create)</Text>
+      </View>
+    </CategoryFormProvider>
   );
 }
 

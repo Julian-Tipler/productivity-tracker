@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { CategoryFormContext } from "../../contexts/CategoryFormContext";
 
 
-export const CategoryCreationForm = () => {
+export const CategoryForm = () => {
   const [name, setName] = useState("");
   const [ratingParameter, setRatingParameter] = useState("");
 
