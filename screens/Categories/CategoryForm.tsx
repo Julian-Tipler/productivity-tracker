@@ -6,6 +6,7 @@ import { RadioButton } from "react-native-paper";
 import { Slider } from "@miblanchard/react-native-slider";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Navigation from "../../navigation";
+import { useNavigation } from "@react-navigation/native";
 
 type CategoryFormInput = {
   name: string;
@@ -16,12 +17,13 @@ type CategoryFormInput = {
 export const CategoryForm = () => {
   const { createCategory } = useContext(CategoryFormContext) as any;
   const { currentUser } = useContext(AuthContext) as any;
+  const navigation = useNavigation();
 
   const [name, setName] = useState("");
   const [ratingParameter, setRatingParameter] = useState<number | number[]>(1);
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     const input = {
       name,
       ratingParameter: String(ratingParameter),
@@ -32,7 +34,7 @@ export const CategoryForm = () => {
 
     await createCategory(input);
     await setErrorMessages([]);
-    Navigation.navigate("")
+    navigation.navigate("CategoriesScreen" as any);
   };
 
   const validateCollection = ({ name }: CategoryFormInput) => {
@@ -48,22 +50,60 @@ export const CategoryForm = () => {
   };
 
   return (
-    <View>
-      <TextInput placeholder="name" onChangeText={setName} />
-      <Slider
-        value={ratingParameter}
-        onValueChange={setRatingParameter}
-        minimumValue={1}
-        maximumValue={10}
-        step={1}
-      />
-      <Text>{ratingParameter}</Text>
+    <View style={styles.container}>
+      <View style={styles.inputContainer}>
+        <Text style={styles.title}>Name</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="name"
+          onChangeText={setName}
+        />
+        <Text style={styles.title}>Rating Parameter</Text>
+        <Slider
+          value={ratingParameter}
+          onValueChange={setRatingParameter}
+          minimumValue={1}
+          maximumValue={10}
+          step={1}
+        />
+        <Text>{ratingParameter}</Text>
+      </View>
       <TouchableOpacity onPress={handleSubmit}>
-        <Text>submit</Text>
+        <Text style={[styles.title, styles.button]}>Submit</Text>
       </TouchableOpacity>
-      <Text>Errors: {errorMessages}</Text>
+      <Text style={styles.title}>Errors: {errorMessages}</Text>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  inputContainer: {
+    width: "80%",
+  },
+  input: {
+    backgroundColor: "white",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginTop: 5,
+  },
+  separator: {
+    marginVertical: 30,
+    height: 1,
+    width: "80%",
+  },
+  button: {
+    backgroundColor: "#0782F9",
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 40,
+  },
+});
