@@ -20,8 +20,6 @@ import useColorScheme from "../hooks/useColorScheme";
 import LoginScreen from "../screens/Auth/LoginScreen";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import GraphsScreen from "../screens/Graphs/GraphsScreen";
-import RatingsScreen from "../screens/Ratings/RatingsScreen";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -32,6 +30,7 @@ import { auth } from "../firebase/firebaseConfig";
 import { HeaderLeft, HeaderRight } from "./Headers";
 import { AuthContext } from "../contexts/AuthContext";
 import { CategoriesStack } from "../screens/Categories/CategoriesStack";
+import { RatingsStack } from "../screens/Ratings/RatingsStack";
 
 export default function Navigation({
   colorScheme,
@@ -108,7 +107,7 @@ function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="TabOne"
-        component={RatingsScreen}
+        component={RatingsStack}
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
           title: "Ratings",
           tabBarIcon: ({ color }) => <TabBarIcon name="check" color={color} />,

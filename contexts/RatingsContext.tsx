@@ -10,7 +10,7 @@ import React, { useContext, useState } from "react";
 import { db } from "../firebase/firebaseConfig";
 import { AuthContext } from "./AuthContext";
 
-export const CategoriesContext = React.createContext({});
+export const RatingsContext = React.createContext({});
 
 export type Rating = {
   id: string;
@@ -19,7 +19,7 @@ export type Rating = {
   userId: string;
 };
 
-export function CategoriesProvider({ children }: { children: any }) {
+export function RatingsProvider({ children }: { children: any }) {
   const [ratings, setRatings] = useState<[]>([]);
   const { currentUser } = useContext(AuthContext) as any;
 
@@ -57,8 +57,8 @@ export function CategoriesProvider({ children }: { children: any }) {
   };
 
   return (
-    <CategoriesContext.Provider value={value}>
+    <RatingsContext.Provider value={value}>
       {children}
-    </CategoriesContext.Provider>
+    </RatingsContext.Provider>
   );
 }

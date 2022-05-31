@@ -1,31 +1,42 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import { RatingCardRatingsBar } from "./RatingCardRatingsBar";
-import { Category } from "./RatingsScreen";
+import { Rating, RatingsContext } from "../../contexts/RatingsContext";
 
 export const RatingCard = ({
-  category,
+  rating,
   selection,
   setSelection,
 }: {
-  category: Category;
+  rating: Rating;
   selection: number | null;
   setSelection: Function;
 }) => {
+  const { createRating } = useContext(RatingsContext) as any;
+
+  const handleSubmit = async () => {
+    const input = {
+      id: rating.id,
+      value: String(selection),
+    };
+
+    await createRating(input);
+  };
+
   return (
     <View style={styles.categoryCard}>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}> {category.title}</Text>
+        <Text style={styles.title}> {rating.name}</Text>
       </View>
       <View style={styles.graphicContainer}>
         <Text>
-          ........................{category.title}
+          ........................{rating.name}
           graphic........................
         </Text>
       </View>
       <RatingCardRatingsBar
-        ratingParameter={category.ratingParameter}
+        ratingParameter={rating.ratingParameter}
         selection={selection}
         setSelection={setSelection}
       />

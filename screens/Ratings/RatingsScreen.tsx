@@ -13,26 +13,22 @@ import { Text, View } from "../../components/Themed";
 import { Ratings } from "./Ratings";
 import ZeroState from "./ZeroState";
 import { AuthContext } from "../../contexts/AuthContext";
-import { getCategories } from "../../api/Categories/getCategories"
+import { getCategories } from "../../api/Categories/getCategories";
 import { RootTabScreenProps } from "../../types";
+import { RatingsContext } from "../../contexts/RatingsContext";
 
-export default function RatingsScreen({ navigation }: RootTabScreenProps<"TabOne">) {
-  const [selection, setSelection] = useState(null);
-  const [categories, setCategories] = useState([]);
-
-  const { currentUser } = useContext(AuthContext) as any;
+export function RatingsScreen({ navigation }: RootTabScreenProps<"TabOne">) {
+  const { ratings, getRatings } = useContext(RatingsContext) as any;
 
   useEffect(() => {
-    getCategories(setCategories, currentUser);
+    getRatings();
   }, []);
 
   return (
     <View style={styles.container}>
-      {categories.length ? (
+      {ratings.length ? (
         <Ratings
-          ratings={categories}
-          selection={selection}
-          setSelection={setSelection}
+          ratings={ratings}
         />
       ) : (
         <ZeroState />

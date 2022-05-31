@@ -1,42 +1,44 @@
 import { View, Text } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "react-native-paper";
-import Swipeable from "react-native-gesture-handler/Swipeable";
-import { RectButton } from "react-native-gesture-handler";
-import { db } from "../../firebase/firebaseConfig";
 
 import { RatingCard } from "./RatingCard";
-import { Rating } from "../../contexts/RatingsContext";
+import { Rating, RatingsContext } from "../../contexts/RatingsContext";
 
+export const Ratings = ({ratings}: {ratings:any}) => {
 
-export const Ratings = ({
-  ratings,
-  selection,
-  setSelection,
-}: {
-  ratings: Rating[];
-  selection: number | null;
-  setSelection: Function;
-}) => {
+  const [selection, setSelection] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const buttonSelected = !!selection;
+
+  console.log(ratings)
+
+  const onSubmitRating = (
+
+  ) => {
+    setCurrentIndex(currentIndex+1)
+    setSelection(null)
+  };
+  
   return (
     <>
-      {currentIndex < categories.length ? (
+      {currentIndex < ratings.length ? (
         <RatingCard
-          category={categories[currentIndex]}
+          rating={ratings[currentIndex]}
           selection={selection}
           setSelection={setSelection}
         />
       ) : (
         <View>
-          <Text>No categories left today!</Text>
+          <Text>No ratings left today!</Text>
         </View>
       )}
       {buttonSelected && (
         <Button
-          onPress={() => onSubmitRating(currentIndex, setCurrentIndex, setSelection)}
+          onPress={() =>
+            onSubmitRating()
+          }
         >
           Next Category
         </Button>
@@ -45,20 +47,4 @@ export const Ratings = ({
   );
 };
 
-const onSubmitRating = (
-  currentIndex: number,
-  setCurrentIndex: Function,
-  setSelection: Function
-) => {
-//   firestore
-//     .collection("books")
-//     .add(data)
-//     .then(() => {
-//       console.log("successful");
-//       setCurrentIndex(currentIndex + 1);
-//       setSelection(null);
-//     })
-//     .catch(() => {
-//       console.log("whoops, an error");
-//     });
-};
+
