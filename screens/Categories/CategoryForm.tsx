@@ -7,6 +7,7 @@ import { Slider } from "@miblanchard/react-native-slider";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Navigation from "../../navigation";
 import { useNavigation } from "@react-navigation/native";
+import { CategoriesContext } from "../../contexts/CategoriesContext";
 
 type CategoryFormInput = {
   name: string;
@@ -15,7 +16,7 @@ type CategoryFormInput = {
 };
 
 export const CategoryForm = () => {
-  const { createCategory } = useContext(CategoryFormContext) as any;
+  const { createCategory } = useContext(CategoriesContext) as any;
   const { currentUser } = useContext(AuthContext) as any;
   const navigation = useNavigation();
 
