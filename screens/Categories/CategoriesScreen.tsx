@@ -2,41 +2,35 @@ import { FontAwesome } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useContext, useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { Card, Title, Paragraph, Button } from "react-native-paper";
 
 import { Text, View } from "../../components/Themed";
 import { AuthContext } from "../../contexts/AuthContext";
-import { CategoriesContext } from "../../contexts/CategoriesContext";
+import { CategoriesContext, Category } from "../../contexts/CategoriesContext";
 import { RootStackParamList, RootTabScreenProps } from "../../types";
 import { CategoryCard } from "./CategoryCard";
 
-export type Category = {
-  name: string;
-  ratingParameter: string;
-};
-
 export function CategoriesScreen({ navigation }: RootTabScreenProps<"TabTwo">) {
-  const { getCategories, categories, setCategories } = useContext(
-    CategoriesContext
-  ) as any;
-  const { currentUser } = useContext(AuthContext) as any;
+  const { categories, getCategories, deleteCategory } = useContext(CategoriesContext) as any;
 
   useEffect(() => {
-    getCategories(setCategories, currentUser);
+    getCategories();
   }, []);
 
+  const renderCard = ({item}:{item:Category}) => {
+    return (
+      <CategoryCard category={item} key={`$category-${item.name}`} deleteCategory={deleteCategory}/>
+    );
+  };
+  console.log(categories)
   return (
     <View style={styles.container}>
-      {categories.map((category: Category) => {
-        return (
-          <CategoryCard
-            category={category}
-            key={`$category-${category.name}`}
-          />
-        );
-      })}
-      <Text style={styles.title}>Plus Button (create)</Text>
+      <FlatList
+        data={categories}
+        renderItem={renderCard}
+        contentContainerStyle={styles.list}
+      ></FlatList>
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("Root", {
@@ -54,6 +48,12 @@ export function CategoriesScreen({ navigation }: RootTabScreenProps<"TabTwo">) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  list: {
+    width: "80%",
+    borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
   },
