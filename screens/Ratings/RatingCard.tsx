@@ -8,10 +8,14 @@ export const RatingCard = ({
   rating,
   selection,
   setSelection,
+  currentIndex,
+  setCurrentIndex,
 }: {
   rating: Rating;
   selection: number | null;
   setSelection: Function;
+  currentIndex: number;
+  setCurrentIndex: Function;
 }) => {
   const { createRating } = useContext(RatingsContext) as any;
 
@@ -20,6 +24,9 @@ export const RatingCard = ({
       id: rating.id,
       value: String(selection),
     };
+
+    setCurrentIndex(currentIndex + 1);
+    setSelection(null);
 
     await createRating(input);
   };

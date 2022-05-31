@@ -14,12 +14,7 @@ export const Ratings = ({ratings}: {ratings:any}) => {
 
   console.log(ratings)
 
-  const onSubmitRating = (
 
-  ) => {
-    setCurrentIndex(currentIndex+1)
-    setSelection(null)
-  };
   
   return (
     <>
@@ -28,6 +23,8 @@ export const Ratings = ({ratings}: {ratings:any}) => {
           rating={ratings[currentIndex]}
           selection={selection}
           setSelection={setSelection}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
         />
       ) : (
         <View>
@@ -35,13 +32,7 @@ export const Ratings = ({ratings}: {ratings:any}) => {
         </View>
       )}
       {buttonSelected && (
-        <Button
-          onPress={() =>
-            onSubmitRating()
-          }
-        >
-          Next Category
-        </Button>
+        <Button onPress={() => onSubmitRating()}>Next Category</Button>
       )}
     </>
   );
