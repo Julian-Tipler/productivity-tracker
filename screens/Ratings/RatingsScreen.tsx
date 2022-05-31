@@ -10,16 +10,11 @@ import {
 import { db } from "../../firebase/firebaseConfig";
 
 import { Text, View } from "../../components/Themed";
-import { Categories } from "./Categories";
+import { Ratings } from "./Ratings";
 import ZeroState from "./ZeroState";
 import { AuthContext } from "../../contexts/AuthContext";
 import { getCategories } from "../../api/Categories/getCategories"
 import { RootTabScreenProps } from "../../types";
-
-export type Category = {
-  title: string;
-  ratingParameter: string;
-};
 
 export default function RatingsScreen({ navigation }: RootTabScreenProps<"TabOne">) {
   const [selection, setSelection] = useState(null);
@@ -34,8 +29,8 @@ export default function RatingsScreen({ navigation }: RootTabScreenProps<"TabOne
   return (
     <View style={styles.container}>
       {categories.length ? (
-        <Categories
-          categories={categories}
+        <Ratings
+          ratings={categories}
           selection={selection}
           setSelection={setSelection}
         />

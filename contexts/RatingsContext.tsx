@@ -1,20 +1,18 @@
 import {
   addDoc,
   collection,
-  deleteDoc,
-  doc,
   getDocs,
   query,
+  serverTimestamp,
   where,
 } from "firebase/firestore";
-import React, { useContext, useState, useEffect } from "react";
-import { getCategories } from "../api/Categories/getCategories";
+import React, { useContext, useState } from "react";
 import { db } from "../firebase/firebaseConfig";
 import { AuthContext } from "./AuthContext";
 
 export const CategoriesContext = React.createContext({});
 
-export type Category = {
+export type Rating = {
   id: string;
   name: string;
   ratingParameter: string;
@@ -27,17 +25,18 @@ export function CategoriesProvider({ children }: { children: any }) {
 
   const createRating = async ({
     id,
+    value
   }: {
     id: string;
+    value: string;
   }) => {
-    await addDoc(collection(db, "categories",id,"ratings"), {
-        createdAt:
+    await addDoc(collection(db, "categories", id, "ratings"), {
+      createdAt: serverTimestamp(),
+      value
     });
-
-    await getCategories();
   };
 
-  const getCategories = async () => {
+  const getRatings = async () => {
     const q = query(
       collection(db, "categories"),
       where("userId", "==", currentUser.uid)
@@ -53,7 +52,8 @@ export function CategoriesProvider({ children }: { children: any }) {
 
   const value = {
     ratings,
-    getCategories,
+    createRating,
+    getRatings,
   };
 
   return (

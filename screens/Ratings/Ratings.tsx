@@ -6,15 +6,15 @@ import { RectButton } from "react-native-gesture-handler";
 import { db } from "../../firebase/firebaseConfig";
 
 import { RatingCard } from "./RatingCard";
-import { Category } from "./RatingsScreen";
+import { Rating } from "../../contexts/RatingsContext";
 
 
-export const Categories = ({
-  categories,
+export const Ratings = ({
+  ratings,
   selection,
   setSelection,
 }: {
-  categories: Category[];
+  ratings: Rating[];
   selection: number | null;
   setSelection: Function;
 }) => {
