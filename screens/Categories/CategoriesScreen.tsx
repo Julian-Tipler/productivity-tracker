@@ -23,7 +23,6 @@ export function CategoriesScreen({ navigation }: RootTabScreenProps<"TabTwo">) {
       <CategoryCard category={item} key={`$category-${item.name}`} deleteCategory={deleteCategory}/>
     );
   };
-  console.log(categories)
   return (
     <View style={styles.container}>
       <FlatList
