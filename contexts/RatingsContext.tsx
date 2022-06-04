@@ -51,18 +51,18 @@ export function DailysProvider({ children }: { children: any }) {
     //a rating .where("createdAt",<,Date.endOfToday).where("createdAt",>,Date.startOfToday)
     //If it does NOT, add that category data to setDailys
 
-    const catHasRatingAlreadyToday = async (cat) => {
+    const catHasNoRatingToday = async (cat) => {
       const ratings = await getDocs(
         query(
           collection(db, `categories/${cat.id}/ratings`),
           where("createdAt", ">", getStartOfToday())
         )
       );
-      return !!ratings.size;
+      return !ratings.size;
     };
 
     await catsSnapshot.forEach(async (cat) => {
-      if (await catHasRatingAlreadyToday(cat)) {
+      if (await catHasNoRatingToday(cat)) {
         setDailys((prev) => [
           ...prev,
           {
@@ -74,15 +74,6 @@ export function DailysProvider({ children }: { children: any }) {
         ]);
       }
     });
-    // const collections = unratedCats.map((doc: QueryDocumentSnapshot<any>) => {
-    //   return { id: doc.id, ...doc.data() };
-    // });
-
-    // await setDailys(
-    //   snapshot.docs.map((doc: QueryDocumentSnapshot<any>) => {
-    //     return { id: doc.id, ...doc.data() };
-    //   })
-    // );
   };
 
   const value = {
