@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { RatingCardRatingsBar } from "./RatingCardRatingsBar";
-import { Rating, RatingsContext } from "../../contexts/RatingsContext";
+import { DailyCardRatingsBar } from "./DailyCardRatingsBar";
+import { Rating, DailysContext } from "../../contexts/RatingsContext";
 import { Card } from "@rneui/themed";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { FontAwesome } from "@expo/vector-icons";
 
-export const RatingCard = ({
+export const DailyCard = ({
   rating,
   currentIndex,
   setCurrentIndex,
@@ -15,7 +14,7 @@ export const RatingCard = ({
   currentIndex: number;
   setCurrentIndex: Function;
 }) => {
-  const { createRating } = useContext(RatingsContext) as any;
+  const { createRating } = useContext(DailysContext) as any;
   const [selection, setSelection] = useState(null);
 
   const buttonSelected = selection!!;
@@ -37,7 +36,7 @@ export const RatingCard = ({
       <Card>
         <Card.Title>{rating.name}</Card.Title>
         <Card.Divider />
-        <RatingCardRatingsBar
+        <DailyCardRatingsBar
           ratingParameter={rating.ratingParameter}
           selection={selection}
           setSelection={setSelection}

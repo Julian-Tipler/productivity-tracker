@@ -10,7 +10,7 @@ import React, { useContext, useState } from "react";
 import { db } from "../firebase/firebaseConfig";
 import { AuthContext } from "./AuthContext";
 
-export const RatingsContext = React.createContext({});
+export const DailysContext = React.createContext({});
 
 export type Rating = {
   id: string;
@@ -20,7 +20,7 @@ export type Rating = {
 };
 
 export function RatingsProvider({ children }: { children: any }) {
-  const [ratings, setRatings] = useState<[] | Rating[]>([]);
+  const [dailys, setDailys] = useState<[] | Rating[]>([]);
   const { currentUser } = useContext(AuthContext) as any;
 
   const createRating = async ({
@@ -36,14 +36,14 @@ export function RatingsProvider({ children }: { children: any }) {
     });
   };
 
-  const getRatings = async () => {
+  const getDailys = async () => {
     const q = query(
       collection(db, "categories"),
       where("userId", "==", currentUser.uid)
     );
     const snapshot = await getDocs(q);
 
-    await setRatings(
+    await setDailys(
       snapshot.docs.map((doc:any) => {
         return { id: doc.id, ...doc.data() };
       })
@@ -51,14 +51,14 @@ export function RatingsProvider({ children }: { children: any }) {
   };
 
   const value = {
-    ratings,
+    dailys,
     createRating,
-    getRatings,
+    getDailys,
   };
 
   return (
-    <RatingsContext.Provider value={value}>
+    <DailysContext.Provider value={value}>
       {children}
-    </RatingsContext.Provider>
+    </DailysContext.Provider>
   );
 }
