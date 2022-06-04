@@ -10,7 +10,7 @@ export const Dailys = ({ dailys }: { dailys: any }) => {
     <>
       {currentIndex < dailys.length ? (
         <DailyCard
-          rating={dailys[currentIndex]}
+          daily={dailys[currentIndex]}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
         />

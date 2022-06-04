@@ -1,16 +1,16 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { DailyCardRatingsBar } from "./DailyCardRatingsBar";
-import { Rating, DailysContext } from "../../contexts/RatingsContext";
+import { Daily, DailysContext } from "../../contexts/RatingsContext";
 import { Card } from "@rneui/themed";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export const DailyCard = ({
-  rating,
+  daily,
   currentIndex,
   setCurrentIndex,
 }: {
-  rating: Rating;
+  daily: Daily;
   currentIndex: number;
   setCurrentIndex: Function;
 }) => {
@@ -21,7 +21,7 @@ export const DailyCard = ({
 
   const handleSubmit = async () => {
     const input = {
-      id: rating.id,
+      id: daily.id,
       value: String(selection),
     };
 
@@ -30,14 +30,15 @@ export const DailyCard = ({
 
     await createRating(input);
   };
+  console.log(daily)
 
   return (
     <View style={styles.cardContainer}>
       <Card>
-        <Card.Title>{rating.name}</Card.Title>
+        <Card.Title>{daily.name}</Card.Title>
         <Card.Divider />
         <DailyCardRatingsBar
-          ratingParameter={rating.ratingParameter}
+          ratingParameter={daily.ratingParameter}
           selection={selection}
           setSelection={setSelection}
         />

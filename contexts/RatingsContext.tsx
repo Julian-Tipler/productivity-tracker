@@ -15,7 +15,7 @@ import { AuthContext } from "./AuthContext";
 
 export const DailysContext = React.createContext({});
 
-export type Rating = {
+export type Daily = {
   id: string;
   name: string;
   ratingParameter: string;
@@ -23,7 +23,7 @@ export type Rating = {
 };
 
 export function DailysProvider({ children }: { children: any }) {
-  const [dailys, setDailys] = useState<[] | Rating[]>([]);
+  const [dailys, setDailys] = useState<[] | Daily[]>([]);
   const { currentUser } = useContext(AuthContext) as any;
 
   const createRating = async ({ id, value }: { id: string; value: string }) => {
@@ -45,30 +45,44 @@ export function DailysProvider({ children }: { children: any }) {
       collection(db, "categories"),
       where("userId", "==", currentUser.uid)
     );
-    const snapshot = await getDocs(userCollectionsQ);
+    const catsSnapshot = await getDocs(userCollectionsQ);
     //this is all the user's categories.
     //iterate through each category and check if the category contains
     //a rating .where("createdAt",<,Date.endOfToday).where("createdAt",>,Date.startOfToday)
     //If it does NOT, add that category data to setDailys
-    snapshot.forEach(async (col) => {
-      const docsWithRatings = await getDocs(
-        query(collection(db, `categories/${col.id}/ratings`),
-        where("createdAt",">",getStartOfToday()))
+
+    const catHasRatingAlreadyToday = async (cat) => {
+      const ratings = await getDocs(
+        query(
+          collection(db, `categories/${cat.id}/ratings`),
+          where("createdAt", ">", getStartOfToday())
+        )
       );
-      docsWithRatings.forEach((doc) => {
-        console.log("FOUND SOME RATINGS", doc.id);
-      });
-    });
+      return !!ratings.size;
+    };
 
-    const collections = snapshot.docs.map((doc: QueryDocumentSnapshot<any>) => {
-      return { id: doc.id, ...doc.data() };
+    await catsSnapshot.forEach(async (cat) => {
+      if (await catHasRatingAlreadyToday(cat)) {
+        setDailys((prev) => [
+          ...prev,
+          {
+            id: cat.id,
+            name: cat.data().name,
+            ratingParameter: cat.data().ratingParameter,
+            userId: cat.data().userId,
+          },
+        ]);
+      }
     });
+    // const collections = unratedCats.map((doc: QueryDocumentSnapshot<any>) => {
+    //   return { id: doc.id, ...doc.data() };
+    // });
 
-    await setDailys(
-      snapshot.docs.map((doc: QueryDocumentSnapshot<any>) => {
-        return { id: doc.id, ...doc.data() };
-      })
-    );
+    // await setDailys(
+    //   snapshot.docs.map((doc: QueryDocumentSnapshot<any>) => {
+    //     return { id: doc.id, ...doc.data() };
+    //   })
+    // );
   };
 
   const value = {
