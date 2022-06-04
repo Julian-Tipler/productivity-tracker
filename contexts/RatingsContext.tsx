@@ -19,7 +19,7 @@ export type Rating = {
   userId: string;
 };
 
-export function RatingsProvider({ children }: { children: any }) {
+export function DailysProvider({ children }: { children: any }) {
   const [dailys, setDailys] = useState<[] | Rating[]>([]);
   const { currentUser } = useContext(AuthContext) as any;
 
