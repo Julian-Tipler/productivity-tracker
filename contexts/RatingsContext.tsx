@@ -20,7 +20,7 @@ export type Rating = {
 };
 
 export function RatingsProvider({ children }: { children: any }) {
-  const [ratings, setRatings] = useState<[]>([]);
+  const [ratings, setRatings] = useState<[] | Rating[]>([]);
   const { currentUser } = useContext(AuthContext) as any;
 
   const createRating = async ({
@@ -44,7 +44,7 @@ export function RatingsProvider({ children }: { children: any }) {
     const snapshot = await getDocs(q);
 
     await setRatings(
-      snapshot.docs.map((doc) => {
+      snapshot.docs.map((doc:any) => {
         return { id: doc.id, ...doc.data() };
       })
     );

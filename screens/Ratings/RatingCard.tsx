@@ -1,23 +1,24 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import { RatingCardRatingsBar } from "./RatingCardRatingsBar";
 import { Rating, RatingsContext } from "../../contexts/RatingsContext";
+import { Card } from "@rneui/themed";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { FontAwesome } from "@expo/vector-icons";
 
 export const RatingCard = ({
   rating,
-  selection,
-  setSelection,
   currentIndex,
   setCurrentIndex,
 }: {
   rating: Rating;
-  selection: number | null;
-  setSelection: Function;
   currentIndex: number;
   setCurrentIndex: Function;
 }) => {
   const { createRating } = useContext(RatingsContext) as any;
+  const [selection, setSelection] = useState(null);
+
+  const buttonSelected = selection!!;
 
   const handleSubmit = async () => {
     const input = {
@@ -32,21 +33,21 @@ export const RatingCard = ({
   };
 
   return (
-    <View style={styles.categoryCard}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}> {rating.name}</Text>
-      </View>
-      <View style={styles.graphicContainer}>
-        <Text>
-          ........................{rating.name}
-          graphic........................
-        </Text>
-      </View>
-      <RatingCardRatingsBar
-        ratingParameter={rating.ratingParameter}
-        selection={selection}
-        setSelection={setSelection}
-      />
+    <View style={styles.cardContainer}>
+      <Card>
+        <Card.Title>{rating.name}</Card.Title>
+        <Card.Divider />
+        <RatingCardRatingsBar
+          ratingParameter={rating.ratingParameter}
+          selection={selection}
+          setSelection={setSelection}
+        />
+      </Card>
+      {buttonSelected && (
+        <TouchableOpacity onPress={() => handleSubmit()}>
+          <Text>Next Category</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -54,22 +55,8 @@ export const RatingCard = ({
 const onSwipe = () => {};
 
 const styles = StyleSheet.create({
-  categoryCard: {
-    height: "70%",
+  cardContainer: {
     width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "space-around",
-    backgroundColor: "white",
-  },
-  titleContainer: {
-    padding: 20,
-  },
-  title: {
-    alignSelf: "center",
-    fontSize: 20,
-    fontWeight: "bold",
   },
   graphicContainer: {
     flex: 3,
