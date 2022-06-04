@@ -51,10 +51,10 @@ export function DailysProvider({ children }: { children: any }) {
     //a rating .where("createdAt",<,Date.endOfToday).where("createdAt",>,Date.startOfToday)
     //If it does NOT, add that category data to setDailys
 
-    const catHasNoRatingToday = async (cat) => {
+    const catHasNoRatingToday = async (id:string) => {
       const ratings = await getDocs(
         query(
-          collection(db, `categories/${cat.id}/ratings`),
+          collection(db, `categories/${id}/ratings`),
           where("createdAt", ">", getStartOfToday())
         )
       );
@@ -62,7 +62,7 @@ export function DailysProvider({ children }: { children: any }) {
     };
 
     await catsSnapshot.forEach(async (cat) => {
-      if (await catHasNoRatingToday(cat)) {
+      if (await catHasNoRatingToday(cat.id)) {
         setDailys((prev) => [
           ...prev,
           {
