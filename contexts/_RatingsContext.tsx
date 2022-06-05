@@ -37,7 +37,7 @@ export function DailysProvider({ children }: { children: any }) {
     const now = new Date();
     now.setHours(4, 0, 0, 0); // +4 hours for Central Time
     const timestamp = Timestamp.fromDate(now);
-    return timestamp; // ex. 1631246400
+    return timestamp;
   }
 
   const getDailys = async () => {
