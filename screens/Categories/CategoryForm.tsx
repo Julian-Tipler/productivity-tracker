@@ -1,11 +1,7 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import React, { useContext, useState } from "react";
-import { CategoryFormContext } from "../../contexts/CategoryFormContext";
-import { AuthContext } from "../../contexts/AuthContext";
-import { RadioButton } from "react-native-paper";
 import { Slider } from "@miblanchard/react-native-slider";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Navigation from "../../navigation";
 import { useNavigation } from "@react-navigation/native";
 import { CategoriesContext } from "../../contexts/CategoriesContext";
 
@@ -16,7 +12,6 @@ type CategoryFormInput = {
 
 export const CategoryForm = () => {
   const { createCategory } = useContext(CategoriesContext) as any;
-  const { currentUser } = useContext(AuthContext) as any;
   const navigation = useNavigation();
 
   const [name, setName] = useState("");
