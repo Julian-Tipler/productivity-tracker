@@ -12,7 +12,6 @@ import { CategoriesContext } from "../../contexts/CategoriesContext";
 type CategoryFormInput = {
   name: string;
   ratingParameter: string;
-  currentUser: any;
 };
 
 export const CategoryForm = () => {
@@ -28,7 +27,6 @@ export const CategoryForm = () => {
     const input = {
       name,
       ratingParameter: String(ratingParameter),
-      currentUser,
     };
     const errors = validateCollection(input);
     if (errors) return setErrorMessages(errors);

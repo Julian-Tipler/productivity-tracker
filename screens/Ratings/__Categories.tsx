@@ -3,7 +3,7 @@ import React from "react";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { RectButton } from "react-native-gesture-handler";
 import { SwipeableCard } from "./CategoryCard";
-import { Category } from "./RatingsScreen";
+import { Category } from "./DailysScreen";
 
 
 export const Categories = ({categories, currentIndex}:{categories: Category[],currentIndex: number}) => {
