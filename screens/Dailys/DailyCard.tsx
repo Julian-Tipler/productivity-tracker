@@ -30,7 +30,6 @@ export const DailyCard = ({
 
     await createRating(input);
   };
-  console.log(daily)
 
   return (
     <View style={styles.cardContainer}>
