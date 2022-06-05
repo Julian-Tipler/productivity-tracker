@@ -46,13 +46,12 @@ export function CategoriesScreen({ navigation }: RootTabScreenProps<"TabTwo">) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "gray"
   },
   list: {
-    alignItems: "center",
-    justifyContent: "center",
+    width: '100%',
+    alignItems: "stretch",
+    justifyContent: "flex-start",
     backgroundColor: "blue",
   },
   title: {
