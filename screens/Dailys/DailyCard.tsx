@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { DailyCardRatingsBar } from "./DailyCardRatingsBar";
-import { Daily, DailysContext } from "../../contexts/_RatingsContext";
 import { Card } from "@rneui/themed";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { CategoriesContext } from "../../contexts/CategoriesContext";
+import { CategoriesContext, Daily } from "../../contexts/CategoriesContext";
 
 export const DailyCard = ({
   daily,

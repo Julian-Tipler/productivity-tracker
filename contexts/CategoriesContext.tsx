@@ -8,7 +8,7 @@ import {
   where,
   serverTimestamp
 } from "firebase/firestore";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { db } from "../firebase/firebaseConfig";
 import { AuthContext } from "./AuthContext";
 import { getStartOfToday } from "./helper";

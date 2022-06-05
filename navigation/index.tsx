@@ -30,7 +30,7 @@ import { auth } from "../firebase/firebaseConfig";
 import { HeaderLeft, HeaderRight } from "./Headers";
 import { AuthContext } from "../contexts/AuthContext";
 import { CategoriesStack } from "../screens/Categories/CategoriesStack";
-import { RatingsStack } from "../screens/Ratings/RatingsStack";
+import { DailysStack } from "../screens/Dailys/DailysStack";
 import { CategoriesProvider } from "../contexts/CategoriesContext";
 
 export default function Navigation({
@@ -109,9 +109,9 @@ function BottomTabNavigator() {
       >
         <BottomTab.Screen
           name="TabOne"
-          component={RatingsStack}
+          component={DailysStack}
           options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-            title: "Ratings",
+            title: "Dailys",
             tabBarIcon: ({ color }) => (
               <TabBarIcon name="check" color={color} />
             ),

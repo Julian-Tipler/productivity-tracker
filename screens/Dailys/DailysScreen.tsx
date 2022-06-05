@@ -5,7 +5,6 @@ import { View } from "../../components/Themed";
 import { Dailys } from "./Dailys";
 import ZeroState from "./ZeroState";
 import { RootTabScreenProps } from "../../types";
-import { DailysContext } from "../../contexts/_RatingsContext";
 import { CategoriesContext } from "../../contexts/CategoriesContext";
 
 export function DailysScreen({ navigation }: RootTabScreenProps<"TabOne">) {
