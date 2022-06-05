@@ -6,7 +6,7 @@ import {
   getDocs,
   query,
   where,
-  serverTimestamp
+  serverTimestamp,
 } from "firebase/firestore";
 import React, { useContext, useState } from "react";
 import { db } from "../firebase/firebaseConfig";
@@ -89,23 +89,18 @@ export function CategoriesProvider({ children }: { children: any }) {
   };
 
   const deleteCategory = async ({ id }: { id: string }) => {
+    await deleteDoc(doc(db, "categories"));
     await deleteDoc(doc(db, "categories", id));
 
     await getCategories();
   };
 
-    const createRating = async ({
-      id,
+  const createRating = async ({ id, value }: { id: string; value: string }) => {
+    await addDoc(collection(db, "categories", id, "ratings"), {
+      createdAt: serverTimestamp(),
       value,
-    }: {
-      id: string;
-      value: string;
-    }) => {
-      await addDoc(collection(db, "categories", id, "ratings"), {
-        createdAt: serverTimestamp(),
-        value,
-      });
-    };
+    });
+  };
 
   const value = {
     categories,
@@ -113,7 +108,7 @@ export function CategoriesProvider({ children }: { children: any }) {
     getCategories,
     deleteCategory,
     dailys,
-    createRating
+    createRating,
   };
 
   return (
