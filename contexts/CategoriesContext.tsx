@@ -7,6 +7,7 @@ import {
   query,
   where,
   serverTimestamp,
+  DocumentData,
 } from "firebase/firestore";
 import React, { useContext, useState } from "react";
 import { db } from "../firebase/firebaseConfig";
@@ -89,8 +90,19 @@ export function CategoriesProvider({ children }: { children: any }) {
   };
 
   const deleteCategory = async ({ id }: { id: string }) => {
-    await deleteDoc(doc(db, "categories"));
-    await deleteDoc(doc(db, "categories", id));
+    // await deleteDoc(doc(db, "categories", id, 'ratings'));
+    const docToDelete = doc(db, "categories", id);
+
+    const ratings = await getDocs(
+      query(
+        collection(db, `categories/${id}/ratings`),
+        where("createdAt", ">", getStartOfToday())
+      )
+    );
+    await ratings.forEach((rating:DocumentData) => {
+      deleteDoc(doc(db,`categories/${id}/ratings/${rating.id}`))
+    })
+    await deleteDoc(docToDelete);
 
     await getCategories();
   };
