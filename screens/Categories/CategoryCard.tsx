@@ -17,17 +17,27 @@ export const CategoryCard = ({
 
   return (
     <Card containerStyle={styles.card}>
-      <Card.Title style={styles.title}>{name}</Card.Title>
+      <View style={styles.header}>
+        <Card.Title style={styles.title}>{name}</Card.Title>
+        <TouchableOpacity onPress={() => setDetailsOpen(!detailsOpen)}>
+          {detailsOpen ? <Text>^</Text> : <Text>v</Text>}
+        </TouchableOpacity>
+      </View>
+      <Card.Divider />
       {detailsOpen ? (
-        <>
-          <Card.Divider />
+        <View style={styles.dropdown}>
           <Text>Rating Parameter: {ratingParameter}</Text>
-          <TouchableOpacity onPress={() => deleteCategory({ id })}>
-            <FontAwesome name="close" color="red" size={50} />
-          </TouchableOpacity>
-        </>
+          <View style={styles.dropdownButtons}>
+            <TouchableOpacity onPress={() => deleteCategory({ id })}>
+              <FontAwesome name="close" color="red" size={40} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => deleteCategory({ id })}>
+              <FontAwesome name="edit" color="red" size={40} />
+            </TouchableOpacity>
+          </View>
+        </View>
       ) : (
-        <></>
+        <View></View>
       )}
     </Card>
   );
@@ -38,7 +48,19 @@ const styles = StyleSheet.create({
     flex: 0.5,
     backgroundColor: "orange",
   },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   title: {
-    
-  }
+    textAlign: "left",
+  },
+  dropdown: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  dropdownButtons: {
+    flexDirection: "row",
+  },
 });
