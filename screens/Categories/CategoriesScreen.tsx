@@ -51,10 +51,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   list: {
-    width: "80%",
-    borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "blue",
   },
   title: {
     fontSize: 20,
