@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { DailyCardRatingsBar } from "./DailyCardRatingsBar";
-import { Daily, DailysContext } from "../../contexts/RatingsContext";
+import { Daily, DailysContext } from "../../contexts/_RatingsContext";
 import { Card } from "@rneui/themed";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { CategoriesContext } from "../../contexts/CategoriesContext";
 
 export const DailyCard = ({
   daily,
@@ -14,7 +15,7 @@ export const DailyCard = ({
   currentIndex: number;
   setCurrentIndex: Function;
 }) => {
-  const { createRating } = useContext(DailysContext) as any;
+  const { createRating } = useContext(CategoriesContext) as any;
   const [selection, setSelection] = useState(null);
 
   const buttonSelected = selection!!;

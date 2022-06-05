@@ -31,6 +31,7 @@ import { HeaderLeft, HeaderRight } from "./Headers";
 import { AuthContext } from "../contexts/AuthContext";
 import { CategoriesStack } from "../screens/Categories/CategoriesStack";
 import { RatingsStack } from "../screens/Ratings/RatingsStack";
+import { CategoriesProvider } from "../contexts/CategoriesContext";
 
 export default function Navigation({
   colorScheme,
@@ -99,51 +100,55 @@ function BottomTabNavigator() {
   };
 
   return (
-    <BottomTab.Navigator
-      initialRouteName="TabOne"
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-      }}
-    >
-      <BottomTab.Screen
-        name="TabOne"
-        component={RatingsStack}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Ratings",
-          tabBarIcon: ({ color }) => <TabBarIcon name="check" color={color} />,
-          headerRight: () => (
-            <HeaderRight navigation={navigation} colorScheme={colorScheme} />
-          ),
-          headerLeft: () => (
-            <HeaderLeft
-              navigation={navigation}
-              colorScheme={colorScheme}
-              action={handleSignOut}
-            />
-          ),
-        })}
-      />
-      <BottomTab.Screen
-        name="TabTwo"
-        component={CategoriesStack}
-        options={{
-          title: "Categories",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="bookmark" color={color} />
-          ),
-          headerRight: () => (
-            <HeaderRight navigation={navigation} colorScheme={colorScheme} />
-          ),
-          headerLeft: () => (
-            <HeaderLeft
-              navigation={navigation}
-              colorScheme={colorScheme}
-              action={handleSignOut}
-            />
-          ),
+    <CategoriesProvider>
+      <BottomTab.Navigator
+        initialRouteName="TabOne"
+        screenOptions={{
+          tabBarActiveTintColor: Colors[colorScheme].tint,
         }}
-      />
-    </BottomTab.Navigator>
+      >
+        <BottomTab.Screen
+          name="TabOne"
+          component={RatingsStack}
+          options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
+            title: "Ratings",
+            tabBarIcon: ({ color }) => (
+              <TabBarIcon name="check" color={color} />
+            ),
+            headerRight: () => (
+              <HeaderRight navigation={navigation} colorScheme={colorScheme} />
+            ),
+            headerLeft: () => (
+              <HeaderLeft
+                navigation={navigation}
+                colorScheme={colorScheme}
+                action={handleSignOut}
+              />
+            ),
+          })}
+        />
+        <BottomTab.Screen
+          name="TabTwo"
+          component={CategoriesStack}
+          options={{
+            title: "Categories",
+            tabBarIcon: ({ color }) => (
+              <TabBarIcon name="bookmark" color={color} />
+            ),
+            headerRight: () => (
+              <HeaderRight navigation={navigation} colorScheme={colorScheme} />
+            ),
+            headerLeft: () => (
+              <HeaderLeft
+                navigation={navigation}
+                colorScheme={colorScheme}
+                action={handleSignOut}
+              />
+            ),
+          }}
+        />
+      </BottomTab.Navigator>
+    </CategoriesProvider>
   );
 }
 
