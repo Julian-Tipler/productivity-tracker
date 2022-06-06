@@ -32,33 +32,38 @@ export const DailyCard = ({
   };
 
   return (
-    <View style={styles.cardContainer}>
-      <Card>
-        <Card.Title>{daily.name}</Card.Title>
-        <Card.Divider />
+    <Card containerStyle={styles.card}>
+      <Card.Title style={styles.title}>{daily.name}</Card.Title>
+      <Card.Divider />
+      <View style={styles.body}>
         <DailyCardRatingsBar
           ratingParameter={daily.ratingParameter}
           selection={selection}
           setSelection={setSelection}
         />
-      </Card>
-      {buttonSelected && (
-        <TouchableOpacity onPress={() => handleSubmit()}>
-          <Text>Next Category</Text>
-        </TouchableOpacity>
-      )}
-    </View>
+        {buttonSelected && (
+          <TouchableOpacity onPress={() => handleSubmit()}>
+            <Text>Next Category</Text>
+          </TouchableOpacity>
+        )}
+      </View>
+    </Card>
   );
 };
 
-const onSwipe = () => {};
-
 const styles = StyleSheet.create({
-  cardContainer: {
-    width: "100%",
+  card: {
+    flex: 0.5,
+    backgroundColor: "gray",
   },
-  graphicContainer: {
-    flex: 3,
-    backgroundColor: "purple",
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  title: {
+    textAlign: "center",
+  },
+  body: {
+    backgroundColor: "red"
   },
 });

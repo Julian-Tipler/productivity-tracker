@@ -35,6 +35,7 @@ export function CategoriesProvider({ children }: { children: any }) {
   const [categories, setCategories] = useState<[] | Category[]>([]);
   const { currentUser } = useContext(AuthContext) as any;
 
+  console.log("DAILYS", dailys)
   const createCategory = async ({
     name,
     ratingParameter,
@@ -68,19 +69,20 @@ export function CategoriesProvider({ children }: { children: any }) {
       return !ratings.size;
     };
 
+    const dailyArray:Daily[] = []
+
     await snapshot.forEach(async (cat) => {
       if (await catHasNoRatingToday(cat.id)) {
-        setDailys((prev) => [
-          ...prev,
-          {
+        dailyArray.push({
             id: cat.id,
             name: cat.data().name,
             ratingParameter: cat.data().ratingParameter,
             userId: cat.data().userId,
-          },
-        ]);
+          })
       }
     });
+
+    await setDailys(dailyArray)
 
     await setCategories(
       snapshot.docs.map((doc: any) => {

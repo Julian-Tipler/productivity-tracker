@@ -5,8 +5,12 @@ const Stack = createNativeStackNavigator();
 
 export const DailysStack = () => {
   return (
-      <Stack.Navigator>
-        <Stack.Screen name={"DailysScreen"} component={DailysScreen} />
-      </Stack.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen
+        name={"DailysScreen"}
+        component={DailysScreen}
+        options={{ headerTitle: "" }}
+      />
+    </Stack.Navigator>
   );
 };

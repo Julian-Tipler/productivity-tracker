@@ -13,7 +13,7 @@ export const DailyCardRatingsBar = ({
   selection: Number | null;
   setSelection: Function;
 }) => {
-  const returnButtons = (ratingParameter:string) => {
+  const returnButtons = (ratingParameter: string) => {
     const buttons = [];
     for (let i = 1; i <= Number(ratingParameter); i++)
       buttons.push(
@@ -39,13 +39,7 @@ export const DailyCardRatingsBar = ({
 };
 
 const styles = StyleSheet.create({
-  buttonsContainer: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    flex: 1,
-  },
+  buttonsContainer: {},
   button: {
     height: 40,
     width: 20,
