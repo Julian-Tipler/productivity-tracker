@@ -1,6 +1,6 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { useContext, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
 import { View } from "../../components/Themed";
@@ -28,22 +28,24 @@ export function CategoriesScreen({ navigation }: RootTabScreenProps<"TabTwo">) {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("Root", {
-              screen: "TabTwo",
-              params: { screen: "CategoryForm" },
-            } as any)
-          }
-        >
-          <FontAwesome name="plus" color="blue" size={40} />
-        </TouchableOpacity>
-      </View>
       <FlatList
         data={categories}
         renderItem={renderCard}
         contentContainerStyle={styles.list}
+        ListFooterComponent={() => (
+          <View style={styles.newCategory}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Root", {
+                  screen: "TabTwo",
+                  params: { screen: "CategoryForm" },
+                } as any)
+              }
+            >
+              <FontAwesome name="plus" color="blue" size={40} />
+            </TouchableOpacity>
+          </View>
+        )}
       ></FlatList>
     </View>
   );
@@ -53,14 +55,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  header: {
+  newCategory: {
     alignItems: "center",
-    paddingRight: 15,
+    padding: 15,
   },
   list: {
-    width: "100%",
     alignItems: "stretch",
     justifyContent: "flex-start",
+    paddingBottom: 15,
   },
   title: {
     fontSize: 20,

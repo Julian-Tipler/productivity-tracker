@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React, { useState } from "react";
 
 import { DailyCard } from "./DailyCard";
@@ -15,10 +15,17 @@ export const Dailys = ({ dailys }: { dailys: any }) => {
           setCurrentIndex={setCurrentIndex}
         />
       ) : (
-        <View>
+        <View style={styles.zeroState}>
           <Text>No dailys left today!</Text>
         </View>
       )}
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  zeroState: {
+    alignItems: "center",
+    margin: 15,
+  },
+});
