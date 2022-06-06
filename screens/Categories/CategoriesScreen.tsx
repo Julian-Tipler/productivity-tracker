@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    alignItems: "flex-end",
+    alignItems: "center",
     paddingRight: 15,
   },
   list: {

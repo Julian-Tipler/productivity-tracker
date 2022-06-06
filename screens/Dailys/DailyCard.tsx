@@ -35,16 +35,18 @@ export const DailyCard = ({
     <Card containerStyle={styles.card}>
       <Card.Title style={styles.title}>{daily.name}</Card.Title>
       <Card.Divider />
-      <DailyCardRatingsBar
-        ratingParameter={daily.ratingParameter}
-        selection={selection}
-        setSelection={setSelection}
-      />
-      {buttonSelected && (
-        <TouchableOpacity onPress={() => handleSubmit()}>
-          <Text>Next Category</Text>
-        </TouchableOpacity>
-      )}
+      <View style={styles.body}>
+        <DailyCardRatingsBar
+          ratingParameter={daily.ratingParameter}
+          selection={selection}
+          setSelection={setSelection}
+        />
+        {buttonSelected && (
+          <TouchableOpacity onPress={() => handleSubmit()}>
+            <Text>Next Category</Text>
+          </TouchableOpacity>
+        )}
+      </View>
     </Card>
   );
 };
@@ -61,12 +63,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
   },
-  dropdown: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  dropdownButtons: {
-    flexDirection: "row",
+  body: {
+    backgroundColor: "red"
   },
 });
