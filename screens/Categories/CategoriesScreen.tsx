@@ -1,55 +1,64 @@
 import { FontAwesome } from "@expo/vector-icons";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useContext, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { Card, Title, Paragraph, Button } from "react-native-paper";
 
-import { Text, View } from "../../components/Themed";
-import { AuthContext } from "../../contexts/AuthContext";
+import { View } from "../../components/Themed";
 import { CategoriesContext, Category } from "../../contexts/CategoriesContext";
-import { RootStackParamList, RootTabScreenProps } from "../../types";
+import { RootTabScreenProps } from "../../types";
 import { CategoryCard } from "./CategoryCard";
 
 export function CategoriesScreen({ navigation }: RootTabScreenProps<"TabTwo">) {
-  const { categories, getCategories, deleteCategory } = useContext(CategoriesContext) as any;
+  const { categories, getCategories, deleteCategory } = useContext(
+    CategoriesContext
+  ) as any;
 
   useEffect(() => {
     getCategories();
   }, []);
 
-  const renderCard = ({item}:{item:Category}) => {
+  const renderCard = ({ item }: { item: Category }) => {
     return (
-      <CategoryCard category={item} key={`$category-${item.name}`} deleteCategory={deleteCategory}/>
+      <CategoryCard
+        category={item}
+        key={`$category-${item.name}`}
+        deleteCategory={deleteCategory}
+      />
     );
   };
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Root", {
+              screen: "TabTwo",
+              params: { screen: "CategoryForm" },
+            } as any)
+          }
+        >
+          <FontAwesome name="plus" color="blue" size={40} />
+        </TouchableOpacity>
+      </View>
       <FlatList
         data={categories}
         renderItem={renderCard}
         contentContainerStyle={styles.list}
       ></FlatList>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate("Root", {
-            screen: "TabTwo",
-            params: { screen: "CategoryForm" },
-          } as any)
-        }
-      >
-        <FontAwesome name="plus" color="red" size={50} />
-      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+  },
+  header: {
+    alignItems: "flex-end",
+    paddingRight: 15,
   },
   list: {
-    width: '100%',
+    width: "100%",
     alignItems: "stretch",
     justifyContent: "flex-start",
   },
