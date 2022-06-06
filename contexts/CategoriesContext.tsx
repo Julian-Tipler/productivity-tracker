@@ -121,7 +121,6 @@ export function CategoriesProvider({ children }: { children: any }) {
   const getRatings = async ({ id }: { id: string }) => {
     const q = query(
       collection(db, `categories/${id}/ratings`),
-      where("userId", "==", currentUser.uid)
     );
     const snapshot = await getDocs(q);
     await setRatings(
@@ -138,6 +137,7 @@ export function CategoriesProvider({ children }: { children: any }) {
     deleteCategory,
     dailys,
     createRating,
+    ratings,
     getRatings,
   };
 

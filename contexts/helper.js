@@ -13,14 +13,14 @@ export const handleSignUp = () =>
       const user = userCredential.user;
     })
     .catch((error) => {
-      console.log(error.message);
+
     });
 
 export const handleLogin = () =>
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log(user);
+
     })
     .catch((error) => {
       const errorCode = error.code;
