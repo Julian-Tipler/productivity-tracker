@@ -9,8 +9,16 @@ const Stack = createNativeStackNavigator();
 export const CategoriesStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name={"CategoriesScreen"} component={CategoriesScreen} />
-      <Stack.Screen name={"CategoryForm"} component={CategoryForm} />
+      <Stack.Screen
+        name={"CategoriesScreen"}
+        component={CategoriesScreen}
+        options={{ headerTitle: "" }}
+      />
+      <Stack.Screen
+        name={"CategoryForm"}
+        component={CategoryForm}
+        options={{ headerTitle: "" }}
+      />
     </Stack.Navigator>
   );
 };
