@@ -32,6 +32,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { CategoriesStack } from "../screens/Categories/CategoriesStack";
 import { DailysStack } from "../screens/Dailys/DailysStack";
 import { CategoriesProvider } from "../contexts/CategoriesContext";
+import { GraphsStack } from "../screens/Graphs/GraphsStack";
 
 export default function Navigation({
   colorScheme,
@@ -102,7 +103,7 @@ function BottomTabNavigator() {
   return (
     <CategoriesProvider>
       <BottomTab.Navigator
-        initialRouteName="TabOne"
+        initialRouteName="TabThree"
         screenOptions={{
           tabBarActiveTintColor: Colors[colorScheme].tint,
         }}
@@ -146,6 +147,26 @@ function BottomTabNavigator() {
               />
             ),
           }}
+        />
+        <BottomTab.Screen
+          name="TabThree"
+          component={GraphsStack}
+          options={({ navigation }: RootTabScreenProps<"TabThree">) => ({
+            title: "Graph",
+            tabBarIcon: ({ color }) => (
+              <TabBarIcon name="area-chart" color={color} />
+            ),
+            headerRight: () => (
+              <HeaderRight navigation={navigation} colorScheme={colorScheme} />
+            ),
+            headerLeft: () => (
+              <HeaderLeft
+                navigation={navigation}
+                colorScheme={colorScheme}
+                action={handleSignOut}
+              />
+            ),
+          })}
         />
       </BottomTab.Navigator>
     </CategoriesProvider>
