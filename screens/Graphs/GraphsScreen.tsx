@@ -26,8 +26,6 @@ export function GraphsScreen({ navigation }: RootTabScreenProps<"TabOne">) {
   const screenWidth = Dimensions.get("window").width;
   const dates = getDatesFromRatings({ ratings });
   const data = getDataFromRatings({ ratings });
-  console.log(dates);
-  console.log(data);
   return (
     <View>
       <LineChart

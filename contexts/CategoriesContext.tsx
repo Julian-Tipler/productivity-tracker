@@ -116,6 +116,7 @@ export function CategoriesProvider({ children }: { children: any }) {
       createdAt: serverTimestamp(),
       value,
     });
+    await getCategories();
   };
 
   const getRatings = async ({ id }: { id: string }) => {
