@@ -16,13 +16,6 @@ import { getStartOfToday } from "./helper";
 
 export const CategoriesContext = React.createContext({});
 
-export type Category = {
-  id: string;
-  name: string;
-  ratingParameter: string;
-  userId: string;
-};
-
 export type Daily = {
   id: string;
   name: string;
@@ -30,12 +23,21 @@ export type Daily = {
   userId: string;
 };
 
+export type Category = {
+  id: string;
+  name: string;
+  ratingParameter: string;
+  userId: string;
+};
+
+export type Rating = any;
+
 export function CategoriesProvider({ children }: { children: any }) {
   const [dailys, setDailys] = useState<[] | Daily[]>([]);
   const [categories, setCategories] = useState<[] | Category[]>([]);
+  const [ratings, setRatings] = useState<[] | Rating[]>([]);
   const { currentUser } = useContext(AuthContext) as any;
 
-  console.log("DAILYS", dailys)
   const createCategory = async ({
     name,
     ratingParameter,
@@ -69,20 +71,20 @@ export function CategoriesProvider({ children }: { children: any }) {
       return !ratings.size;
     };
 
-    const dailyArray:Daily[] = []
+    const dailyArray: Daily[] = [];
 
     await snapshot.forEach(async (cat) => {
       if (await catHasNoRatingToday(cat.id)) {
         dailyArray.push({
-            id: cat.id,
-            name: cat.data().name,
-            ratingParameter: cat.data().ratingParameter,
-            userId: cat.data().userId,
-          })
+          id: cat.id,
+          name: cat.data().name,
+          ratingParameter: cat.data().ratingParameter,
+          userId: cat.data().userId,
+        });
       }
     });
 
-    await setDailys(dailyArray)
+    await setDailys(dailyArray);
 
     await setCategories(
       snapshot.docs.map((doc: any) => {
@@ -101,9 +103,9 @@ export function CategoriesProvider({ children }: { children: any }) {
         where("createdAt", ">", getStartOfToday())
       )
     );
-    await ratings.forEach((rating:DocumentData) => {
-      deleteDoc(doc(db,`categories/${id}/ratings/${rating.id}`))
-    })
+    await ratings.forEach((rating: DocumentData) => {
+      deleteDoc(doc(db, `categories/${id}/ratings/${rating.id}`));
+    });
     await deleteDoc(docToDelete);
 
     await getCategories();
@@ -114,6 +116,19 @@ export function CategoriesProvider({ children }: { children: any }) {
       createdAt: serverTimestamp(),
       value,
     });
+    await getCategories();
+  };
+
+  const getRatings = async ({ id }: { id: string }) => {
+    const q = query(
+      collection(db, `categories/${id}/ratings`),
+    );
+    const snapshot = await getDocs(q);
+    await setRatings(
+      snapshot.docs.map((doc: any) => {
+        return { id: doc.id, ...doc.data() };
+      })
+    );
   };
 
   const value = {
@@ -123,6 +138,8 @@ export function CategoriesProvider({ children }: { children: any }) {
     deleteCategory,
     dailys,
     createRating,
+    ratings,
+    getRatings,
   };
 
   return (

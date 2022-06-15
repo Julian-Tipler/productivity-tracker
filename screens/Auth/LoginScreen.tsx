@@ -129,13 +129,13 @@ const styles = StyleSheet.create({
 //     const user = userCredential.user;
 //   })
 //   .catch((error) => {
-//     console.log(error.message)
+
 //   });
 
 // const handleLogin = () => signInWithEmailAndPassword(auth, email, password)
 //   .then((userCredential) => {
 //     const user = userCredential.user;
-//     console.log(user)
+
 //   })
 //   .catch((error) => {
 //     const errorCode = error.code;
