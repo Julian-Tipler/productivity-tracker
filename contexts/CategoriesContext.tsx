@@ -120,9 +120,7 @@ export function CategoriesProvider({ children }: { children: any }) {
   };
 
   const getRatings = async ({ id }: { id: string }) => {
-    const q = query(
-      collection(db, `categories/${id}/ratings`),
-    );
+    const q = query(collection(db, `categories/${id}/ratings`));
     const snapshot = await getDocs(q);
     await setRatings(
       snapshot.docs.map((doc: any) => {
